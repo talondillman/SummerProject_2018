@@ -1,19 +1,20 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SummerProject", "Assembly-CSharp.csproj", "{F7AF11A5-364E-E476-D12B-06025E445305}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-
+		{F7AF11A5-364E-E476-D12B-06025E445305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7AF11A5-364E-E476-D12B-06025E445305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7AF11A5-364E-E476-D12B-06025E445305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7AF11A5-364E-E476-D12B-06025E445305}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal

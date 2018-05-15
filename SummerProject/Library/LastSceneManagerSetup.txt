@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/SampleScene.unity
+- path: C:/Users/angel/Documents/SummerProject/Assets/Scenes/SampleScene.unity
   isLoaded: 1
   isActive: 1
