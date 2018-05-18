@@ -23,31 +23,31 @@ public class Activator : MonoBehaviour
     void Update()
     {
         //button pressed, activator flashes
-        if (Input.GetButtonDown("Note 1") || Input.GetButtonDown("Note 2") || Input.GetButtonDown("Note 3") || Input.GetButtonDown("Note 4"))
+        if (!active && (Input.GetButtonDown("Note 1") || Input.GetButtonDown("Note 2") || Input.GetButtonDown("Note 3") || Input.GetButtonDown("Note 4")))
         {
             StartCoroutine(Pressed());
         }
         //button pressed should correspond with type of note
-        if (Input.GetButtonDown("Note 1") && note.tag == "Note 1" && active)
+        if (active && Input.GetButtonDown("Note 1") && note.tag == "Note 1")
         {
             //if button pressed at correct time, note is destroyed
             Destroy(note);
             StartCoroutine(Pressed());
         }
 
-        if (Input.GetButtonDown("Note 2") && note.tag == "Note 2" && active)
+        if (active &&  Input.GetButtonDown("Note 2") && note.tag == "Note 2" )
         {
             //if button pressed at correct time, note is destroyed
             Destroy(note);
             StartCoroutine(Pressed());
         }
-        if (Input.GetButtonDown("Note 3") && note.tag == "Note 3" && active)
+        if (active && Input.GetButtonDown("Note 3") && note.tag == "Note 3" )
         {
             //if button pressed at correct time, note is destroyed
             Destroy(note);
             StartCoroutine(Pressed());
         }
-        if (Input.GetButtonDown("Note 4") && note.tag == "Note 4" && active)
+        if (active && Input.GetButtonDown("Note 4") && note.tag == "Note 4" )
         {
             //if button pressed at correct time, note is destroyed
             Destroy(note);
@@ -70,7 +70,32 @@ public class Activator : MonoBehaviour
     IEnumerator Pressed()
     {
         //change color of flash depending on button pressed?
-        sr.color = new Color(0, 0, 0);
+        //Need to fix
+        if(Input.GetButtonDown("Note 1"))
+        {
+            sr.color = new Color(26, 133, 236);
+
+        }
+        if (Input.GetButtonDown("Note 2"))
+        {
+            sr.color = new Color(236, 26, 42, 255);
+
+        }
+        if (Input.GetButtonDown("Note 3"))
+        {
+            sr.color = new Color(86, 236, 26, 255);
+
+        }
+        if (Input.GetButtonDown("Note 4"))
+        {
+            sr.color = new Color(0, 0, 0);
+
+        }
+        else
+        {
+            sr.color = new Color(0, 0, 0);
+
+        }
         yield return new WaitForSeconds(0.01f);
         sr.color = old;
     }
