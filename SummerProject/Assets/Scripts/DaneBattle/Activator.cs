@@ -22,6 +22,8 @@ public class Activator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         //button pressed, activator flashes
         if (!active && (Input.GetButtonDown("Note 1") || Input.GetButtonDown("Note 2") || Input.GetButtonDown("Note 3") || Input.GetButtonDown("Note 4")))
         {
