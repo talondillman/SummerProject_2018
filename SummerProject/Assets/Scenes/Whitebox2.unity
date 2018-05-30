@@ -37333,7 +37333,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetLookAt: {fileID: 0}
-  PathLookAt: {fileID: 0}
   Distance: 0
   DistanceMin: 1
   DistanceMax: 15
@@ -37341,7 +37340,7 @@ MonoBehaviour:
   followHeight: 1
   MouseWheelSensitivity: 5
   DistanceSmooth: 0.05
-  X_Smooth: 0.05
+  X_Smooth: 0.1
   Y_Smooth: 0.1
 --- !u!1 &973846479
 GameObject:

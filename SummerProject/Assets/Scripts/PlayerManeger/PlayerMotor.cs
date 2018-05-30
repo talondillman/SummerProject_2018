@@ -64,7 +64,7 @@ public class PlayerMotor : MonoBehaviour {
     {
         if (PlayerController.CharacterController.isGrounded)
         {
-            
+            Debug.Log("Player is grounded: Jumping");
             VeritcalVelocity = JumpSpeed;
         }
     }

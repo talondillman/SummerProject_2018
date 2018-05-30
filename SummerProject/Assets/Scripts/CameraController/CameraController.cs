@@ -15,6 +15,7 @@ public class CameraController : MonoBehaviour {
     [SerializeField] float DistanceMax = 15f; //How far away the camera can be
     [SerializeField] float followDistance = 1f; // How far behind the character the camera will be
     [SerializeField] float followHeight = 1f; // How high up the camera is from the player
+    [SerializeField] float tilt = 15f; //degree to tilt the camera down
    
     [SerializeField] float MouseWheelSensitivity = 5f; 
     
@@ -85,15 +86,12 @@ public class CameraController : MonoBehaviour {
         float posX = Mathf.SmoothDamp(position.x, TargetLookAt.position.x - followDistance, ref velocityX, X_Smooth);
         float posY = Mathf.SmoothDamp(position.y, TargetLookAt.position.y + followHeight, ref velocityY, Y_Smooth);
 
-        //Follow on path look at 
-        //float posX = Mathf.SmoothDamp(position.x, PathLookAt.position.x - followDistance, ref velocityX, X_Smooth);
-        //float posY = Mathf.SmoothDamp(position.y, PathLookAt.position.y + followHeight, ref velocityY, Y_Smooth);
-
         position = new Vector3(posX, posY, -Distance);
         Debug.Log("PosX: " + posX + " PosY: " + posY + " Desired Distance: " + -Distance);
         Debug.Log("Camera Position: " + position.ToString());
         transform.position = position;
-        transform.LookAt(TargetLookAt);
+        transform.eulerAngles = new Vector3(tilt, 0, 0);
+        //transform.LookAt(TargetLookAt);
     }
 
     //Make sure stuff is within bounds
@@ -126,14 +124,7 @@ public class CameraController : MonoBehaviour {
 
         //Find where to look at
         targetLookAt = GameObject.Find("targetLookAt") as GameObject;
-        //pathLookAt = GameObject.Find("pathLookAt") as GameObject;
-
-        if (targetLookAt == null)
-        {
-            targetLookAt = new GameObject("targetLookAt");
-            targetLookAt.transform.position = Vector3.zero;//if null look at origin
-        }
-
+  
         myCamera.TargetLookAt = targetLookAt.transform; //assigning global variable
         //myCamera.PathLookAt = pathLookAt.transform;
     }

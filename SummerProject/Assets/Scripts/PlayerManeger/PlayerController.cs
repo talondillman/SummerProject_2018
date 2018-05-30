@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour {
 
     public static CharacterController CharacterController;
     private static PlayerController Instance;
-    private GameObject PathLookAt;
+    private GameObject TargetLookAt;
 
     [SerializeField] float velocityX = 0f;
     [SerializeField] float velocityY = 0f;
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
         CharacterController = GetComponent("CharacterController") as CharacterController;
         Instance = this;
 
-        PathLookAt = GameObject.Find("pathLookAt");
+        TargetLookAt = GameObject.Find("targetLookAt");
 
         DontDestroyOnLoad(Instance);
         CameraController.UsingExistingOrCreateNewMainCamera();//check camera
@@ -48,13 +48,13 @@ public class PlayerController : MonoBehaviour {
         //If player isn't moving look at the player
         if (CharacterController.velocity == Vector3.zero)
         {
-            ChangePathLookAt(0, 0);
+            //ChangeTargetLookAt(0, 0);
         }else if(CharacterController.velocity.x > 0) //if moving right look right.
         {
-            ChangePathLookAt(Change_X, Change_Y);
+            ChangeTargetLookAt(Change_X, Change_Y);
         }else if(CharacterController.velocity.x < 0) //if moving left look left
         {
-            ChangePathLookAt(-Change_X, Change_Y);
+            ChangeTargetLookAt(-Change_X, Change_Y);
         }
 
         HandleActionInput();
@@ -62,23 +62,27 @@ public class PlayerController : MonoBehaviour {
         PlayerMotor.Instance.UpdateMotor();
        
 	}
-
-    private void ChangePathLookAt(float x, float y)
+    /// <summary>
+    /// For Camera smoothing
+    /// </summary>
+    /// <param name="x"> x distance to move targetLookAt</param>
+    /// <param name="y"> y distance to move targetLookAt</param>
+    private void ChangeTargetLookAt(float x, float y)
     {
         Vector3 playerPosition = CharacterController.transform.position;
 
         float posX = Mathf.SmoothDamp(position.x, playerPosition.x + x, ref velocityX, X_Smooth);
         float posY = Mathf.SmoothDamp(position.y, playerPosition.y + y, ref velocityY, Y_Smooth);
 
-        position = new Vector3(posX, posY, playerPosition.z);
-        PathLookAt.transform.position = position;
+        position = new Vector3(playerPosition.x + x, playerPosition.y + y, playerPosition.z);
+        //position = new Vector3(posX, posY, playerPosition.z);
+        TargetLookAt.transform.position = position;
     }
 
     private void HandleActionInput()
     {
         if (Input.GetButton("Jump"))
         {
-            
             Jump();
         }
     }
