@@ -8,18 +8,14 @@ public class CameraController : MonoBehaviour {
     public static CameraController Instance;
 
     public Transform TargetLookAt;
-    public Transform PathLookAt;
+    //public Transform PathLookAt;
 
     [SerializeField] float Distance = 5f; // How far Away the camera should be.
     [SerializeField] float DistanceMin = 1f; // How close the camera can be
     [SerializeField] float DistanceMax = 15f; //How far away the camera can be
     [SerializeField] float followDistance = 1f; // How far behind the character the camera will be
     [SerializeField] float followHeight = 1f; // How high up the camera is from the player
-    //[SerializeField] float RotateX = 10f;
-    //[SerializeField] float MaxRotateX = 15f;
-    //[SerializeField] float RotateY = 5f;
-    //[SerializeField] float MaxRotateY = 15f;
-
+   
     [SerializeField] float MouseWheelSensitivity = 5f; 
     
     //transition to new camera location in time (seconds)
@@ -61,10 +57,7 @@ public class CameraController : MonoBehaviour {
         {
             return;
         }
-        if (PathLookAt == null)
-        {
-            return;
-        }
+        
         //HandelPlayerInput();
         UpdatePosition();
     }
@@ -89,18 +82,18 @@ public class CameraController : MonoBehaviour {
     void UpdatePosition()
     {
         //Follow on player
-        //float posX = Mathf.SmoothDamp(position.x, TargetLookAt.position.x - followDistance, ref velocityX, X_Smooth);
-        //float posY = Mathf.SmoothDamp(position.y, TargetLookAt.position.y + followHeight, ref velocityY, Y_Smooth);
+        float posX = Mathf.SmoothDamp(position.x, TargetLookAt.position.x - followDistance, ref velocityX, X_Smooth);
+        float posY = Mathf.SmoothDamp(position.y, TargetLookAt.position.y + followHeight, ref velocityY, Y_Smooth);
 
         //Follow on path look at 
-        float posX = Mathf.SmoothDamp(position.x, PathLookAt.position.x - followDistance, ref velocityX, X_Smooth);
-        float posY = Mathf.SmoothDamp(position.y, PathLookAt.position.y + followHeight, ref velocityY, Y_Smooth);
+        //float posX = Mathf.SmoothDamp(position.x, PathLookAt.position.x - followDistance, ref velocityX, X_Smooth);
+        //float posY = Mathf.SmoothDamp(position.y, PathLookAt.position.y + followHeight, ref velocityY, Y_Smooth);
 
         position = new Vector3(posX, posY, -Distance);
-        //Debug.Log("PosX: " + posX + " PosY: " + posY + " Desired Distance: " + -Distance);
-        //Debug.Log("Camera Position: " + position.ToString());
+        Debug.Log("PosX: " + posX + " PosY: " + posY + " Desired Distance: " + -Distance);
+        Debug.Log("Camera Position: " + position.ToString());
         transform.position = position;
-        transform.LookAt(PathLookAt);
+        transform.LookAt(TargetLookAt);
     }
 
     //Make sure stuff is within bounds
@@ -114,7 +107,7 @@ public class CameraController : MonoBehaviour {
     {
         GameObject tempCamera;
         GameObject targetLookAt;
-        GameObject pathLookAt;
+        //GameObject pathLookAt;
         CameraController myCamera;
 
         //Look for a camera, if it exits assign it, otherwise make it
@@ -133,7 +126,7 @@ public class CameraController : MonoBehaviour {
 
         //Find where to look at
         targetLookAt = GameObject.Find("targetLookAt") as GameObject;
-        pathLookAt = GameObject.Find("pathLookAt") as GameObject;
+        //pathLookAt = GameObject.Find("pathLookAt") as GameObject;
 
         if (targetLookAt == null)
         {
@@ -142,7 +135,7 @@ public class CameraController : MonoBehaviour {
         }
 
         myCamera.TargetLookAt = targetLookAt.transform; //assigning global variable
-        myCamera.PathLookAt = pathLookAt.transform;
+        //myCamera.PathLookAt = pathLookAt.transform;
     }
 
 }
