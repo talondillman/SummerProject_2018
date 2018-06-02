@@ -87,8 +87,8 @@ public class CameraController : MonoBehaviour {
         float posY = Mathf.SmoothDamp(position.y, TargetLookAt.position.y + followHeight, ref velocityY, Y_Smooth);
 
         position = new Vector3(posX, posY, -Distance);
-        Debug.Log("PosX: " + posX + " PosY: " + posY + " Desired Distance: " + -Distance);
-        Debug.Log("Camera Position: " + position.ToString());
+        //Debug.Log("PosX: " + posX + " PosY: " + posY + " Desired Distance: " + -Distance);
+        //Debug.Log("Camera Position: " + position.ToString());
         transform.position = position;
         transform.eulerAngles = new Vector3(tilt, 0, 0);
         //transform.LookAt(TargetLookAt);

@@ -43,12 +43,15 @@ public class PlayerMotor : MonoBehaviour {
         MoveVector = new Vector3(MoveVector.x, VeritcalVelocity, MoveVector.z);
         ApplyGravity();
 
+
         PlayerController.CharacterController.Move(MoveVector * Time.deltaTime);
 
     }
 
+    //Make things fall, the player mostly
     void ApplyGravity()
     {
+        //But not to fast
         if(MoveVector.y > -TerminalVelocity)
         {
             MoveVector = new Vector3(MoveVector.x, MoveVector.y - Gravity * Time.deltaTime, MoveVector.z);
@@ -64,12 +67,12 @@ public class PlayerMotor : MonoBehaviour {
     {
         if (PlayerController.CharacterController.isGrounded)
         {
-            Debug.Log("Player is grounded: Jumping");
             VeritcalVelocity = JumpSpeed;
         }
     }
 
     //Used to keep player alligned with camera
+    //Obviously unescesary for 2.5D
     void SnapAllignCharacterWithCamera()
     {
         if(MoveVector.x != 0 || MoveVector.z != 0)

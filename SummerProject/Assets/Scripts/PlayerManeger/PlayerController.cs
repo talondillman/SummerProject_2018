@@ -57,8 +57,10 @@ public class PlayerController : MonoBehaviour {
             ChangeTargetLookAt(-Change_X, Change_Y);
         }
 
-        HandleActionInput();
+       
         GetLocomotionInput();
+        HandleActionInput();
+
         PlayerMotor.Instance.UpdateMotor();
        
 	}
@@ -79,10 +81,24 @@ public class PlayerController : MonoBehaviour {
         TargetLookAt.transform.position = position;
     }
 
+    void GetLocomotionInput()
+    {
+        float deadZone = 0.1f; //Used for controllers
+
+        //zero movement to get new speed every frame
+        PlayerMotor.Instance.VeritcalVelocity = PlayerMotor.Instance.MoveVector.y; //saves Vertical Velocity
+        //Debug.Log("Saving: " + PlayerMotor.Instance.VeritcalVelocity);
+        PlayerMotor.Instance.MoveVector = Vector3.zero;
+
+        if (Input.GetAxis("Horizontal") > deadZone || Input.GetAxis("Horizontal") < -deadZone)
+        {
+            PlayerMotor.Instance.MoveVector += new Vector3( Input.GetAxis("Horizontal"), 0, 0);
+        }
+    }
+
     private void HandleActionInput()
     {
-        if (Input.GetButton("Jump"))
-        {
+        if (Input.GetButton("Jump")) {
             Jump();
         }
     }
@@ -92,19 +108,5 @@ public class PlayerController : MonoBehaviour {
     {
         PlayerMotor.Instance.Jump();
     }
-    
-    void GetLocomotionInput()
-    {
-        float deadZone = 0.1f; //Used for controllers
-        //zero movement to get new every frame
-        PlayerMotor.Instance.VeritcalVelocity = PlayerMotor.Instance.MoveVector.y; //saves Vertical Velocity so that you can keep it.
-        PlayerMotor.Instance.MoveVector = Vector3.zero;
 
-        if (Input.GetAxis("Horizontal") > deadZone || Input.GetAxis("Horizontal") < -deadZone)
-        {
-            PlayerMotor.Instance.MoveVector += new Vector3( Input.GetAxis("Horizontal"), 0, 0);
-        }
-    }
-
-    
 }
