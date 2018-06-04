@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 0
-    path: Assets/__DELETED_GUID_Trash/a37cff93e2b26614bb795f75a2633ec5
+    path: 
     guid: a37cff93e2b26614bb795f75a2633ec5
   - enabled: 1
     path: Assets/Scenes/Scene1.unity
@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OverWorld.unity
     guid: 1929abcb222d5414ca6c9106e96dd0bf
+  - enabled: 1
+    path: Assets/Scenes/Whitebox2.unity
+    guid: c17884cbd0a08094ca23b3d64cf9e417
   m_configObjects: {}

@@ -207,12 +207,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetLookAt: {fileID: 0}
-  PathLookAt: {fileID: 0}
   Distance: 0
   DistanceMin: 1
   DistanceMax: 15
   followDistance: 0
   followHeight: 4
+  tilt: 15
   MouseWheelSensitivity: 5
   DistanceSmooth: 0.05
   X_Smooth: 0.05
@@ -340,6 +340,11 @@ Prefab:
     - target: {fileID: 4909846426824404, guid: 6ca151c4b30d355418c90d9c2880ce53, type: 2}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114338831621938490, guid: 6ca151c4b30d355418c90d9c2880ce53,
+        type: 2}
+      propertyPath: JumpSpeed
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6ca151c4b30d355418c90d9c2880ce53, type: 2}

@@ -38,6 +38,7 @@ public class CameraController : MonoBehaviour {
     {
         if(Instance != null)
         {
+            Destroy(this.gameObject);
             return;
         }
         Instance = this;
