@@ -19,4 +19,8 @@ public class Note : MonoBehaviour {
 	void Update () {
 		
 	}
+    public void setSpeed(int rate)
+    {
+        speed = rate;
+    }
 }
