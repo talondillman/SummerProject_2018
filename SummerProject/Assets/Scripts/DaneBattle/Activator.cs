@@ -28,6 +28,7 @@ public class Activator : MonoBehaviour
         if (!active && (Input.GetButtonDown("Note 1") || Input.GetButtonDown("Note 2") || Input.GetButtonDown("Note 3") || Input.GetButtonDown("Note 4")))
         {
             StartCoroutine(Pressed());
+            
         }
         //button pressed should correspond with type of note
         if (active && Input.GetButtonDown("Note 1") && note.tag == "Note 1")

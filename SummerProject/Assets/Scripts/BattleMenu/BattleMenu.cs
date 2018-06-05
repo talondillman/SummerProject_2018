@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+
 
 public class BattleMenu : MonoBehaviour
 {
@@ -14,21 +16,23 @@ public class BattleMenu : MonoBehaviour
 
     public GameObject activator;
     public GameObject note1;
+    public static BattleMenu instance;
 
+    private string p1ActionName="";
 
     private bool p1Moved;
     private bool p2Moved;
     private bool foeMoved;
     private bool canSwap;
+    private bool dancePhase;
 
-    public bool basicAtk;
 
-    private BattleTurnStart battleStart = new BattleTurnStart();
 
-    // Use this for initialization
-    public enum BattleTurns
+/// <summary>
+/// The different types of scenes in a battle 
+/// </summary>
+public enum BattleTurns
     {
-
         P1,
         P2,
         ENEMY,
@@ -40,14 +44,12 @@ public class BattleMenu : MonoBehaviour
     public BattleTurns currentState = BattleTurns.P1;
     void Start()
     {
-
+        instance = this;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        Debug.Log(currentState);
 
         if (!p1Moved && !p2Moved)
         {
@@ -69,8 +71,9 @@ public class BattleMenu : MonoBehaviour
 
                 //SETUP BATTLE
 
-                if (p1Moved)
+                if (p1Moved && dancePhase)
                 {
+                    switchDancePhase();
                     if (!p2Moved)
                     {
                         currentState = BattleTurns.P2;
@@ -93,6 +96,7 @@ public class BattleMenu : MonoBehaviour
                 //SETUP BATTLE
                 if (p2Moved)
                 {
+                    switchDancePhase();
                     if (!p1Moved)
                     {
                         currentState = BattleTurns.P1;
@@ -160,17 +164,20 @@ public class BattleMenu : MonoBehaviour
     }
     public void p1Action()
     {
-       // activator.SetActive(true);
-       // note1.SetActive(true);
-      //  Instantiate(activator, Camera.main.WorldToScreenPoint(new Vector3(0, Screen.height/2, 0)), Quaternion.identity);
-      //  Instantiate(note1, new Vector3(1,1, 0), Quaternion.identity);
-
-       // Instantiate(note1, Camera.main.WorldToViewportPoint(new Vector3(Screen.width, Screen.height/2, 0)), Quaternion.identity);
-            
-        p1Moved = true;
+     p1Moved = true;
     }
     public void p2Action()
     {
         p2Moved = true;
+    }
+
+    public void setActionName(string name)
+    {
+        this.p1ActionName = name;
+    }
+
+    public void switchDancePhase()
+    {
+        this.dancePhase = !dancePhase;
     }
 }
