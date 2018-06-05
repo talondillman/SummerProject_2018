@@ -9,7 +9,9 @@ public class LevelTransition : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        LevelLoader_other.ThisIsTheOnlyOne.LoadScene(loadScene);
+        if (collision.tag == "Player") {
+            LevelLoader_other.ThisIsTheOnlyOne.LoadScene(loadScene);
+        }
         //SceneManager.LoadScene(loadScene, LoadSceneMode.Additive);
     }
 }

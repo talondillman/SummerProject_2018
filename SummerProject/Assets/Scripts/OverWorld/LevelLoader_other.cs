@@ -59,6 +59,26 @@ public class LevelLoader_other : MonoBehaviour {
         Debug.Log("Finding player and moving");
         GameObject.FindGameObjectWithTag("Player").transform.position = spawnhere;
     }
+    /// <summary>
+    /// Loads the Dance Battle Scene
+    /// </summary>
+    /// <param name="scene"> name of the scene to load </param>
+    /// <param name="DanceBattle"> Whether or not it's a dance battle</param>
+    public void LoadScene(string scene, bool DanceBattle)
+    {
+        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+
+        GoBlack();
+        Invoke("GoBack", timeToWhite);
+
+        if (DanceBattle) {
+            Debug.Log("Making player inactive");
+            GameObject.FindGameObjectWithTag("Player").SetActive(false);
+        } else {
+            Debug.Log("Making player active");
+            GameObject.FindGameObjectWithTag("Player").SetActive(true);
+        }
+    }
 
     void GoBlack()
     {
