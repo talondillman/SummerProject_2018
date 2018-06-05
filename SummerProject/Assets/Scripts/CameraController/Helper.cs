@@ -2,6 +2,7 @@
 
 public static class Helper
 {
+  
     public static float ClampAngle(float angle, float min, float max)
     {
         //Keeps camera from making full rotations

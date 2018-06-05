@@ -10,11 +10,8 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField] float velocityX = 0f;
     [SerializeField] float velocityY = 0f;
-    [SerializeField] float X_Smooth = 0.05f;
-    [SerializeField] float Y_Smooth = 0.01f;
     [SerializeField] float Change_X = 5f;
-    [SerializeField] float Change_Y = 2f;
-
+    [SerializeField] float Change_Y = 0f;
 
     //Used for path camera
     private Vector3 position = Vector3.zero;
@@ -56,7 +53,6 @@ public class PlayerController : MonoBehaviour {
         {
             ChangeTargetLookAt(-Change_X, Change_Y);
         }
-
        
         GetLocomotionInput();
         HandleActionInput();
@@ -73,11 +69,7 @@ public class PlayerController : MonoBehaviour {
     {
         Vector3 playerPosition = CharacterController.transform.position;
 
-        float posX = Mathf.SmoothDamp(position.x, playerPosition.x + x, ref velocityX, X_Smooth);
-        float posY = Mathf.SmoothDamp(position.y, playerPosition.y + y, ref velocityY, Y_Smooth);
-
         position = new Vector3(playerPosition.x + x, playerPosition.y + y, playerPosition.z);
-        //position = new Vector3(posX, posY, playerPosition.z);
         TargetLookAt.transform.position = position;
     }
 

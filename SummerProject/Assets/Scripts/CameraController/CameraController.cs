@@ -8,12 +8,11 @@ public class CameraController : MonoBehaviour {
     public static CameraController Instance;
 
     public Transform TargetLookAt;
-    //public Transform PathLookAt;
 
     [SerializeField] float Distance = 5f; // How far Away the camera should be.
-    [SerializeField] float DistanceMin = 1f; // How close the camera can be
-    [SerializeField] float DistanceMax = 15f; //How far away the camera can be
-    [SerializeField] float followDistance = 1f; // How far behind the character the camera will be
+    private float DistanceMin = 5f; // How close the camera can be
+    private float DistanceMax = 10f; //How far away the camera can be
+    [SerializeField] float followDistance = 0f; // How far behind the character the camera will be
     [SerializeField] float followHeight = 1f; // How high up the camera is from the player
     [SerializeField] float tilt = 15f; //degree to tilt the camera down
    
@@ -21,7 +20,7 @@ public class CameraController : MonoBehaviour {
     
     //transition to new camera location in time (seconds)
     public float DistanceSmooth = 0.05f;
-    public float X_Smooth = 0.05f;
+    public float X_Smooth = 0.2f;
     public float Y_Smooth = 0.1f;
    
     private float startDistance = 0f;
@@ -38,6 +37,7 @@ public class CameraController : MonoBehaviour {
     {
         if(Instance != null)
         {
+            Debug.Log("Returning this = " + this.ToString());
             Destroy(this.gameObject);
             return;
         }
@@ -47,7 +47,7 @@ public class CameraController : MonoBehaviour {
 
     private void Start()
     {
-        Distance = Mathf.Clamp(Distance, DistanceMax, DistanceMin);
+        Distance = Mathf.Clamp(Distance, DistanceMin, DistanceMax);
         startDistance = Distance;
         Reset();
     }
@@ -106,28 +106,26 @@ public class CameraController : MonoBehaviour {
     {
         GameObject tempCamera;
         GameObject targetLookAt;
-        //GameObject pathLookAt;
-        CameraController myCamera;
 
         //Look for a camera, if it exits assign it, otherwise make it
-        if(Camera.main != null)
-        {
+        if (Camera.main != null) {
+            Debug.Log("temp Camera = existing");
             tempCamera = Camera.main.gameObject;
-        } else
-        {
+        } else {
+            Debug.Log("Creating new camera.");
             tempCamera = new GameObject("Main Camera");
             tempCamera.AddComponent<Camera>();
             tempCamera.tag = "MainCamera";
         }
 
-        tempCamera.AddComponent<CameraController>();
-        myCamera = tempCamera.GetComponent<CameraController>() as CameraController;
+        //tempCamera.AddComponent<CameraController>();
+        Instance = tempCamera.GetComponent<CameraController>() as CameraController;
 
         //Find where to look at
         targetLookAt = GameObject.Find("targetLookAt") as GameObject;
-  
-        myCamera.TargetLookAt = targetLookAt.transform; //assigning global variable
-        //myCamera.PathLookAt = pathLookAt.transform;
+
+        Instance.TargetLookAt = targetLookAt.transform; //assigning global variable
+
     }
 
 }

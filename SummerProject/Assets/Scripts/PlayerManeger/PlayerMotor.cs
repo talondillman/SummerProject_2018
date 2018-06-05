@@ -11,7 +11,7 @@ public class PlayerMotor : MonoBehaviour {
     public float JumpSpeed = 6f;
 
     public Vector3 MoveVector { get; set; }
-    public float VeritcalVelocity { get; set; }
+    public float VeritcalVelocity { get; set; } 
 
     private void Awake()
     {
@@ -42,7 +42,6 @@ public class PlayerMotor : MonoBehaviour {
 
         MoveVector = new Vector3(MoveVector.x, VeritcalVelocity, MoveVector.z);
         ApplyGravity();
-
 
         PlayerController.CharacterController.Move(MoveVector * Time.deltaTime);
 
