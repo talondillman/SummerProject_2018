@@ -8,10 +8,11 @@ public class DoorHandler : MonoBehaviour {
 	public Transform player;
 	public float distance = 2.0f;
     public string travelToSceneNamed;
+    public int spawnPoint;
 
 	// Use this for initialization
-	void Start () {
-		
+	void Awake () {
+        player =  GameObject.FindGameObjectWithTag("Player").transform;
 	}
 	
 	// Update is called once per frame
@@ -22,15 +23,15 @@ public class DoorHandler : MonoBehaviour {
 			gameObject.GetComponent<MeshRenderer>().enabled = false;
 	}
 
-    void OnTriggerStay2D(Collider2D col)
+    void OnTriggerStay(Collider col)
     {
-        print("Collision with Door Trigger");
+        //print("Collision with Door Trigger");
         if (col.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.E))
         {
             if (travelToSceneNamed == "" || travelToSceneNamed == null)
                 print("No Scene Specified");
             else
-                SceneManager.LoadScene(travelToSceneNamed);
+                LevelLoader_other.ThisIsTheOnlyOne.LoadScene(travelToSceneNamed, spawnPoint);
         }
     }
 }
