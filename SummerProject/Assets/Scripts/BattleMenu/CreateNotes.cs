@@ -48,7 +48,7 @@ public class CreateNotes : MonoBehaviour {
                             noteMade = true;
                             
                         }
-                        if (noteD==null && noteMade)
+                        if ((noteD==null || noteD.transform.position.x < -10) && noteMade)
                         {
                             Debug.Log("Switch to P2");
                             BattleMenu.instance.switchDancePhase();
