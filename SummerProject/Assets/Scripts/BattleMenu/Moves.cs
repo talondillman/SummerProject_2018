@@ -47,5 +47,11 @@ public class Moves : MonoBehaviour {
                     Debug.Log("Move used.");
                     break;
                 }
+            case "Pop n Lock":
+                {
+                    doAction = true;
+                    break;
+                }
         }    }
+
 }

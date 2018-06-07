@@ -13,12 +13,9 @@ public class BattleMenu : MonoBehaviour
     public GameObject p1TestAction;
     public GameObject p2TestAction;
     public GameObject foeTestAction;
-
+    public GameObject enemyButtonTest;
     public GameObject activator;
-    public GameObject note1;
     public static BattleMenu instance;
-
-    private string p1ActionName="";
 
     private bool p1Moved;
     private bool p2Moved;
@@ -26,40 +23,39 @@ public class BattleMenu : MonoBehaviour
     private bool canSwap;
     private bool dancePhase;
 
+    public BattleTurns currentState = BattleTurns.P1;//all fights start with P1
 
 
-/// <summary>
-/// The different types of scenes in a battle 
-/// </summary>
-public enum BattleTurns
+    /// <summary>
+    /// The different types of scenes in a battle 
+    /// </summary>
+    public enum BattleTurns
     {
         P1,
         P2,
         ENEMY,
         LOSE,
         WIN,
-        ACTION
     }
 
-    public BattleTurns currentState = BattleTurns.P1;
+
     void Start()
     {
+        enemyButtonTest.SetActive(false);
         instance = this;
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        //check if swap tactic is possible
         if (!p1Moved && !p2Moved)
-        {
             canSwap = true;
-        }
         else
-        {
             canSwap = false;
-        }
 
+        Debug.Log(currentState);
+
+        //switch states depending on person's turn
         switch (currentState)
         {
             case (BattleTurns.P1):
@@ -69,19 +65,14 @@ public enum BattleTurns
                 p1TestAction.SetActive(true);
                 p1Menu.SetActive(true);
 
-                //SETUP BATTLE
-
+                //If p1 has done an action, switch
                 if (p1Moved && dancePhase)
                 {
-                    switchDancePhase();
+                    dancePhase = false; 
                     if (!p2Moved)
-                    {
                         currentState = BattleTurns.P2;
-                    }
                     else
-                    {
                         currentState = BattleTurns.ENEMY;
-                    }
                 }
 
                 break;
@@ -93,18 +84,13 @@ public enum BattleTurns
                 p2TestAction.SetActive(true);
                 p2Menu.SetActive(true);
 
-                //SETUP BATTLE
-                if (p2Moved)
+                if (p2Moved && dancePhase)
                 {
-                    switchDancePhase();
+                    dancePhase = false;
                     if (!p1Moved)
-                    {
                         currentState = BattleTurns.P1;
-                    }
                     else
-                    {
                           currentState = BattleTurns.ENEMY;
-                    }
                 }
 
                 break;
@@ -117,22 +103,20 @@ public enum BattleTurns
 
                 //enemy action
                 foeTestAction.SetActive(true);
+                enemyButtonTest.SetActive(true);
 
-                p1Moved = false;
-                p2Moved = false;
-
-                if (foeMoved)
+                if (foeMoved && dancePhase)
                 {
+                    foeTestAction.SetActive(false);
+                    enemyButtonTest.SetActive(false);
+
+                    //restart turn order after action
+                    p1Moved = false;
+                    p2Moved = false;
+                    dancePhase = false;
                     currentState = BattleTurns.P1;
                 }
 
-                break;
-
-            case (BattleTurns.ACTION):
-                p1Menu.SetActive(false);
-                p2Menu.SetActive(false);
-
-                //SETUP BATTLE
                 break;
 
             case (BattleTurns.LOSE):
@@ -152,6 +136,10 @@ public enum BattleTurns
 
         }
     }
+
+/// <summary>
+/// Used to swap which player is active
+/// </summary>
     public void swapAction()
     {
         if (canSwap)
@@ -170,11 +158,11 @@ public enum BattleTurns
     {
         p2Moved = true;
     }
-
-    public void setActionName(string name)
+    public void foeAction()
     {
-        this.p1ActionName = name;
+        foeMoved = true;
     }
+
 
     public void switchDancePhase()
     {
