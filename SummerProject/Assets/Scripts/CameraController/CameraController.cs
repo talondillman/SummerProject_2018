@@ -38,7 +38,7 @@ public class CameraController : MonoBehaviour {
         if(Instance != null)
         {
             Debug.Log("Returning this = " + this.ToString());
-            Destroy(this.gameObject);
+            Destroy(this);
             return;
         }
         Instance = this;
