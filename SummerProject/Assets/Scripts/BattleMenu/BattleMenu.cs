@@ -115,13 +115,16 @@ public class BattleMenu : MonoBehaviour
                 p2TestAction.SetActive(false);
 
                 //enemy action
-                foeTestAction.SetActive(true);
-                enemyButtonTest.SetActive(true);
+                //foeTestAction.SetActive(true);
+              //  enemyButtonTest.SetActive(true);
 
-                if (foeMoved && dancePhase)
-                {
-                    foeTestAction.SetActive(false);
-                    enemyButtonTest.SetActive(false);
+                int rand = Random.Range(1, 10);
+                PlayerStats.stats.TakeDamage(rand);
+
+              //  if (foeMoved && dancePhase)
+               // {
+                   // foeTestAction.SetActive(false);
+                    //enemyButtonTest.SetActive(false);
 
                     //restart turn order after action
                     p1Moved = false;
@@ -130,7 +133,7 @@ public class BattleMenu : MonoBehaviour
                     endBattleState();
                     if(!endBattle)
                     currentState = BattleTurns.P1;
-                }
+//                }
 
                 break;
 
