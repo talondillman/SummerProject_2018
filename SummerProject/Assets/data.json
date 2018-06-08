@@ -1,11 +1,11 @@
 {
-	"Moves": [
-		"id": 0,
-		"name": "2-4 Step",
-		"damage": 2,
-		"notes": ["Note 2", "Note 4"],
-		"multitarget": false
-	},
+  "Moves": {
+    "damage": 2,
+    "id": 0,
+    "multitarget": false,
+    "name": "2-4 Step",
+    "notes": [ "Note 2", "Note 4" ]
+  },
 	{
 		"id": 1,
 		"name": "Pop 'n' Lock",
@@ -13,21 +13,19 @@
 		"notes": ["Note 1", "Note 3"],
 		"multitarget": false
 	},
-	 {
-		"id": 2,
-		"name": "Flow With It",
-		"damage": 0,
-		"notes": ["Note 1", "Note 2", "Note 4"],
-		"multitarget": true
-	},
+  {
+    "damage": 0,
+    "id": 2,
+    "multitarget": true,
+    "name": "Flow With It",
+    "notes": [ "Note 1", "Note 2", "Note 4" ]
+  },
 	{
 		"id": 3,
 		"name": "Flare",
 		"damage": 1,
-		"notes": ["Note 1", "Note 2",
-			"Note 3", "Note 4"
-		],
+    "notes": [ "Note 1", "Note 2", "Note 3", "Note 4" ],
 		"multitarget": true
 		}
-	]
+	
 }

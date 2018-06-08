@@ -6,21 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: 
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/Scene1.unity
+    path: 
     guid: 809695c5053156646b9e673598d4b0bc
   - enabled: 0
-    path: Assets/Scenes/OverWorld.unity
+    path: 
     guid: 1929abcb222d5414ca6c9106e96dd0bf
   - enabled: 1
-    path: Assets/Scenes/Whitebox2.unity
+    path: Assets/Scenes/WhiteBoxStreet.unity
     guid: c17884cbd0a08094ca23b3d64cf9e417
   - enabled: 1
     path: Assets/Scenes/42ndStreet.unity
     guid: a4c942275c727ac45943a7304bf3dbc5
+  - enabled: 1
+    path: Assets/Scenes/BattleMenu.unity
+    guid: 6ed931f8f73ecc44cbea3aa131179bd3
   m_configObjects: {}
