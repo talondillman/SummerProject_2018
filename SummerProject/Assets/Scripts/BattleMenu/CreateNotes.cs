@@ -58,6 +58,25 @@ public class CreateNotes : MonoBehaviour {
                         //when last note is hit or goes offscreen, destroy the notes and end turn
                         if ((noteD==null || noteD.transform.position.x < -10) && noteMade)
                         {
+                            int damage = 5;
+                            if (noteA != null)
+                            {
+                                damage--;
+                            }
+                            if (noteB != null)
+                            {
+                                damage--;
+                            }
+                            if (noteC != null)
+                            {
+                                damage--;
+                            }
+                            if (noteD != null)
+                            {
+                                damage--;
+                            }
+                            EnemyStats.stats.TakeDamage(damage);
+
                             Destroy(noteA);
                             Destroy(noteB);
                             Destroy(noteC);
@@ -92,6 +111,24 @@ public class CreateNotes : MonoBehaviour {
                         }
                         if ((noteD == null || noteD.transform.position.x < -10) && noteMade)
                         {
+                            int damage = 5;
+                            if (noteA != null)
+                            {
+                                damage--;
+                            }
+                            if (noteB != null)
+                            {
+                                damage--;
+                            }
+                            if (noteC != null)
+                            {
+                                damage--;
+                            }
+                            if (noteD != null)
+                            {
+                                damage--;
+                            }
+                            EnemyStats.stats.TakeDamage(damage);
                             Destroy(noteA);
                             Destroy(noteB);
                             Destroy(noteC);
