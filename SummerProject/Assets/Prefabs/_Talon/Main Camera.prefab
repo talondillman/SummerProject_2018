@@ -63,7 +63,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -98,11 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetLookAt: {fileID: 0}
-  Distance: 0
-  DistanceMin: 1
-  DistanceMax: 15
+  Distance: 5
   followDistance: 0
-  followHeight: 5
+  followHeight: 1
   tilt: 10
   MouseWheelSensitivity: 5
   DistanceSmooth: 0.05
