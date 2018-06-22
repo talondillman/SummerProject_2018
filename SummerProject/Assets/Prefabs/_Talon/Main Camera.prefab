@@ -104,7 +104,7 @@ MonoBehaviour:
   tilt: 10
   MouseWheelSensitivity: 5
   DistanceSmooth: 0.05
-  X_Smooth: 0.1
+  X_Smooth: 0.3
   Y_Smooth: 0.1
 --- !u!124 &124124490493359652
 Behaviour:

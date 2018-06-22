@@ -7,14 +7,17 @@ public class PlayerController : MonoBehaviour {
     public static CharacterController CharacterController;
     private static PlayerController Instance;
     private GameObject TargetLookAt;
+    private float DistanceMoved = 0;
 
     [SerializeField] float velocityX = 0f;
     [SerializeField] float velocityY = 0f;
     [SerializeField] float Change_X = 5f;
     [SerializeField] float Change_Y = 0f;
+    [SerializeField] float DistanceToChangeCamera = 1f;
 
     //Used for path camera
     private Vector3 position = Vector3.zero;
+    private Vector3 lastPosition;
 
     void Awake()
     {
@@ -27,30 +30,34 @@ public class PlayerController : MonoBehaviour {
 
         TargetLookAt = GameObject.Find("targetLookAt");
 
+        lastPosition = transform.position;
         DontDestroyOnLoad(Instance);
         CameraController.UsingExistingOrCreateNewMainCamera();//check camera
     }
 	
 	void Update ()
     {
-        
-
-        
         //If the camera doesn't exist don't do anything
         if (Camera.main == null)
         {
             return;
         }
 
+        DistanceMoved += Vector3.Distance(transform.position, lastPosition);
+        lastPosition = transform.position;
+
         //If player isn't moving look at the player
         if (CharacterController.velocity == Vector3.zero)
         {
+            DistanceMoved = 0;
             //ChangeTargetLookAt(0, 0);
-        }else if(CharacterController.velocity.x > 0) //if moving right look right.
+        }else if(CharacterController.velocity.x > 0 && DistanceMoved > DistanceToChangeCamera) //if moving right look right.
         {
             ChangeTargetLookAt(Change_X, Change_Y);
-        }else if(CharacterController.velocity.x < 0) //if moving left look left
+            
+        }else if(CharacterController.velocity.x < 0 && DistanceMoved > DistanceToChangeCamera) //if moving left look left
         {
+            
             ChangeTargetLookAt(-Change_X, Change_Y);
         }
        
