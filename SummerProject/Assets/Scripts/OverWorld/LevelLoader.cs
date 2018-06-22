@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelLoader : MonoBehaviour {
-
-    //There can only be one
+        //There can only be one
     public static LevelLoader ThisIsTheOnlyOne;
     
     private Transform SpawnPoint;// Spawn Point to move palyer to on load scene
@@ -39,7 +38,7 @@ public class LevelLoader : MonoBehaviour {
         panel.GetComponent<Image>().color = new Color(0, 0, 0, 0);
     }
     /// <summary>
-    /// Loads the scene and places player at a regular position
+    /// Loads the scene and places player at a default position
     /// </summary>
     /// <param name="scene"> The scene to load </param>
     public void LoadScene(string scene)
