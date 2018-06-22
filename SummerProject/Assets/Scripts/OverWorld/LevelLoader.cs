@@ -82,10 +82,11 @@ public class LevelLoader : MonoBehaviour {
     /// <param name="DanceBattle"> Whether or not it's a dance battle</param>
     public void LoadScene(string scene, bool DanceBattle)
     {
-        LastScene = SceneManager.GetActiveScene();
-        EndBattleSpawnPoint = Player.transform;
-        Debug.Log("SpawnPoint = " + EndBattleSpawnPoint.ToString());
-
+        if (!DanceBattle) {
+            LastScene = SceneManager.GetActiveScene();
+            EndBattleSpawnPoint.position = new Vector3(Player.transform.position.x -1, Player.transform.position.y, Player.transform.position.z) ;
+            Debug.Log("SpawnPoint = " + EndBattleSpawnPoint.ToString());
+        }
         SceneManager.LoadScene(scene, LoadSceneMode.Single);        
 
         if (DanceBattle) {

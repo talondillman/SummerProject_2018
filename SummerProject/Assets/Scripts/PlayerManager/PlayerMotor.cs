@@ -41,13 +41,16 @@ public class PlayerMotor : MonoBehaviour {
         MoveVector *= moveSpeed;
 
         MoveVector = new Vector3(MoveVector.x, VeritcalVelocity, MoveVector.z);
+        CheckCeiling();
         ApplyGravity();
 
         PlayerController.CharacterController.Move(MoveVector * Time.deltaTime);
 
     }
 
-    //Make things fall, the player mostly
+   /// <summary>
+   /// Make things fall, the player mostly
+   /// </summary>
     void ApplyGravity()
     {
         //But not to fast
@@ -61,7 +64,18 @@ public class PlayerMotor : MonoBehaviour {
             MoveVector = new Vector3(MoveVector.x, -1, MoveVector.z);
         }
     }
+    /// <summary>
+    /// Checks to stop player from moving up when it hits the ceiling
+    /// </summary>
+    void CheckCeiling()
+    {
+        if(MoveVector.y > 0) {
 
+        }
+    }
+    /// <summary>
+    /// Jump, but only if your grounded
+    /// </summary>
     public void Jump()
     {
         if (PlayerController.CharacterController.isGrounded)
@@ -72,6 +86,9 @@ public class PlayerMotor : MonoBehaviour {
 
     //Used to keep player alligned with camera
     //Obviously unescesary for 2.5D
+    /// <summary>
+    /// Used to keep the player alligned 
+    /// </summary>
     void SnapAllignCharacterWithCamera()
     {
         if(MoveVector.x != 0 || MoveVector.z != 0)
