@@ -25,6 +25,7 @@ public class LevelLoader : MonoBehaviour {
         }
 
         ThisIsTheOnlyOne = this;
+        Debug.Log("this is the only one = " + ThisIsTheOnlyOne.ToString());
         GameObject.DontDestroyOnLoad(this.gameObject);
 
         //Find the player && camera

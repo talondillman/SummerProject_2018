@@ -8,7 +8,7 @@ public class CreateNotes : MonoBehaviour {
     public GameObject note2;
     public GameObject note3;
     public GameObject note4;
-
+    public GameObject[] notesList;
     private GameObject noteA;
     private GameObject noteB;
     private GameObject noteC;
@@ -22,6 +22,15 @@ public class CreateNotes : MonoBehaviour {
     private void Awake()
     {
         instance = this;
+    }
+    public void Start()
+    {
+        notesList = new GameObject[8];
+        notesList[1] = note1;
+        notesList[2] = note2;
+        notesList[3] = note3;
+        notesList[4] = note4;
+//        { note1, note2, note3, note4};
     }
 
     /// <summary>
@@ -42,10 +51,16 @@ public class CreateNotes : MonoBehaviour {
                         //make notes only once
                         if (!noteMade)
                         {
-                             noteA = Instantiate(note2, new Vector3(17,0,0), Quaternion.identity);
-                             noteB = Instantiate(note4, new Vector3(18, 0, 0), Quaternion.identity);
-                             noteC = Instantiate(note2, new Vector3(20, 0, 0), Quaternion.identity);
-                             noteD = Instantiate(note4, new Vector3(21, 0, 0), Quaternion.identity);
+                            GameObject pattern1 = notesList[Random.Range(1, 4)];
+                            GameObject pattern2 = notesList[Random.Range(1, 4)];
+                            while (pattern1.Equals(pattern2))
+                            {
+                                pattern2= notesList[Random.Range(1, 4)];
+                            }
+                             noteA = Instantiate(pattern1, new Vector3(17,0,0), Quaternion.identity);
+                             noteB = Instantiate(pattern2, new Vector3(18, 0, 0), Quaternion.identity);
+                             noteC = Instantiate(pattern1, new Vector3(20, 0, 0), Quaternion.identity);
+                             noteD = Instantiate(pattern2, new Vector3(21, 0, 0), Quaternion.identity);
 
                             noteA.SetActive(true);
                             noteB.SetActive(true);

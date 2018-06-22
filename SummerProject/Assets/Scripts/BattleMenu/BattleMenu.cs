@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.IO;
 
 
@@ -148,6 +149,11 @@ public class BattleMenu : MonoBehaviour
                 p1Menu.SetActive(false);
                 p2Menu.SetActive(false);
                 winText.SetActive(true);
+
+                //Scene lastScene = LevelLoader.ThisIsTheOnlyOne.LastScene;
+                 LevelLoader.ThisIsTheOnlyOne.LoadScene("WhiteBoxStreet", false);
+               // Debug.Log(lastScene.name);
+               // LevelLoader.ThisIsTheOnlyOne.LoadScene(lastScene.name, false);
 
                 //SETUP BATTLE
                 break;
