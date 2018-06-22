@@ -63300,8 +63300,74 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 1361488773375014, guid: 55a5bd0601f55b84481830e463d5cccb, type: 2}
-      propertyPath: m_IsActive
+    - target: {fileID: 114876542256845570, guid: 55a5bd0601f55b84481830e463d5cccb,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114876542256845570, guid: 55a5bd0601f55b84481830e463d5cccb,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114942694970902882, guid: 55a5bd0601f55b84481830e463d5cccb,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114942694970902882, guid: 55a5bd0601f55b84481830e463d5cccb,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114989292369677268, guid: 55a5bd0601f55b84481830e463d5cccb,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114989292369677268, guid: 55a5bd0601f55b84481830e463d5cccb,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114135131978403732, guid: 55a5bd0601f55b84481830e463d5cccb,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114135131978403732, guid: 55a5bd0601f55b84481830e463d5cccb,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114233764116640482, guid: 55a5bd0601f55b84481830e463d5cccb,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114233764116640482, guid: 55a5bd0601f55b84481830e463d5cccb,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114962885597960170, guid: 55a5bd0601f55b84481830e463d5cccb,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114962885597960170, guid: 55a5bd0601f55b84481830e463d5cccb,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114478920210462096, guid: 55a5bd0601f55b84481830e463d5cccb,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114478920210462096, guid: 55a5bd0601f55b84481830e463d5cccb,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -83265,7 +83331,7 @@ MonoBehaviour:
   player: {fileID: 0}
   distance: 2
   travelToSceneNamed: 42ndStreet
-  spawnPoint: 0
+  spawnPoint: 1
 --- !u!1 &2122440005
 GameObject:
   m_ObjectHideFlags: 0

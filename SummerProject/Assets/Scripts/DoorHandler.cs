@@ -31,7 +31,7 @@ public class DoorHandler : MonoBehaviour {
             if (travelToSceneNamed == "" || travelToSceneNamed == null)
                 print("No Scene Specified");
             else
-                LevelLoader_other.ThisIsTheOnlyOne.LoadScene(travelToSceneNamed, spawnPoint);
+                LevelLoader.ThisIsTheOnlyOne.LoadScene(travelToSceneNamed, spawnPoint);
         }
     }
 }

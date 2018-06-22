@@ -38,11 +38,11 @@ public class CameraController : MonoBehaviour {
         if(Instance != null)
         {
             Debug.Log("Returning this = " + this.ToString());
-            Destroy(this);
+            Destroy(this.gameObject);
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
