@@ -216,10 +216,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityX: 0
   velocityY: 0
-  X_Smooth: 0.2
-  Y_Smooth: 0
   Change_X: 2
   Change_Y: 0
+  DistanceToChangeCamera: 1
 --- !u!114 &114338831621938490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -231,10 +230,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7b9592524cf4547b7d78e38b74fe6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 7
   Gravity: 21
   TerminalVelocity: 20
-  JumpSpeed: 8
+  JumpSpeed: 9
 --- !u!114 &114815899050824510
 MonoBehaviour:
   m_ObjectHideFlags: 1
