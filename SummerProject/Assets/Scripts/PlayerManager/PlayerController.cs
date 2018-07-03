@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float Change_X = 5f;
     [SerializeField] float Change_Y = 0f;
     [SerializeField] float DistanceToChangeCamera = 1f;
+    private string Platforms = "Platform";
 
     //Used for path camera
     private Vector3 position = Vector3.zero;
@@ -63,7 +64,7 @@ public class PlayerController : MonoBehaviour {
        
         GetLocomotionInput();
         HandleActionInput();
-
+        
         PlayerMotor.Instance.UpdateMotor();
        
 	}
@@ -97,15 +98,39 @@ public class PlayerController : MonoBehaviour {
 
     private void HandleActionInput()
     {
-        if (Input.GetButton("Jump")) {
+        if (Input.GetButton("Jump") && Input.GetButton("Down")){
+            FallThrough();
+        }
+        else if (Input.GetButton("Jump")) {
             Jump();
         }
     }
 
-    //Calls Jump
+    /// <summary>
+    /// Calls Jump from Player Motor
+    /// </summary>
     private void Jump()
     {
         PlayerMotor.Instance.Jump();
+    }
+
+    private void FallThrough()
+    {
+        PlayerMotor.Instance.FallThrough();
+    }
+
+    /// <summary>
+    /// Checks to see if the player hit an object with the tag of Platform;
+    /// </summary>
+    /// <param name="hit"></param>
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        GameObject hitThis = hit.collider.gameObject;
+        if (hitThis.transform.parent != null && hitThis.transform.parent.tag == Platforms) {
+            if(hitThis.transform.position.y > this.position.y + this.transform.localScale.y) {
+                PlayerMotor.Instance.HitCeiling();
+            }
+        }
     }
 
 }

@@ -11,6 +11,7 @@ TagManager:
   - Note 4
   - Enemy
   - SpawnPoint
+  - Platform
   layers:
   - Default
   - TransparentFX

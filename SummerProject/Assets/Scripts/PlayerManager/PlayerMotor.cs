@@ -9,7 +9,7 @@ public class PlayerMotor : MonoBehaviour {
     public float Gravity = 21f;
     public float TerminalVelocity = 20f;
     public float JumpSpeed = 6f;
-
+    
     public Vector3 MoveVector { get; set; }
     public float VeritcalVelocity { get; set; } 
 
@@ -41,7 +41,6 @@ public class PlayerMotor : MonoBehaviour {
         MoveVector *= moveSpeed;
 
         MoveVector = new Vector3(MoveVector.x, VeritcalVelocity, MoveVector.z);
-        CheckCeiling();
         ApplyGravity();
 
         PlayerController.CharacterController.Move(MoveVector * Time.deltaTime);
@@ -67,10 +66,11 @@ public class PlayerMotor : MonoBehaviour {
     /// <summary>
     /// Checks to stop player from moving up when it hits the ceiling
     /// </summary>
-    void CheckCeiling()
+    public void HitCeiling()
     {
         if(MoveVector.y > 0) {
-
+            Debug.Log("Moving up changing VerticalVelocity");
+            MoveVector = new Vector3(MoveVector.x, 0, MoveVector.z);
         }
     }
     /// <summary>
@@ -84,6 +84,10 @@ public class PlayerMotor : MonoBehaviour {
         }
     }
 
+    public void FallThrough()
+    {
+       
+    }
     //Used to keep player alligned with camera
     //Obviously unescesary for 2.5D
     /// <summary>
