@@ -11,6 +11,10 @@ TagManager:
   - Note 4
   - Enemy
   - SpawnPoint
+  - Note 5
+  - Note 6
+  - Note 8
+  - Note 7
   layers:
   - Default
   - TransparentFX

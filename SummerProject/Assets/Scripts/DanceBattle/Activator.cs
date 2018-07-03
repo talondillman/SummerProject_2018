@@ -22,10 +22,14 @@ public class Activator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!this.isActiveAndEnabled)
+        {
+            sr.color = new Color(255, 255, 255);
+        }
 
 
-        //button pressed, activator flashes
-        if (!active && (Input.GetButtonDown("Note 1") || Input.GetButtonDown("Note 2") || Input.GetButtonDown("Note 3") || Input.GetButtonDown("Note 4")))
+            //button pressed, activator flashes
+            if (!active && (Input.GetButtonDown("Note 1") || Input.GetButtonDown("Note 2") || Input.GetButtonDown("Note 3") || Input.GetButtonDown("Note 4") || Input.GetButtonDown("Note 5") || Input.GetButtonDown("Note 6") || Input.GetButtonDown("Note 7") || Input.GetButtonDown("Note 8")))
         {
             StartCoroutine(Pressed());
             
@@ -56,12 +60,36 @@ public class Activator : MonoBehaviour
             Destroy(note);
             StartCoroutine(Pressed());
         }
+        if (active && Input.GetButtonDown("Note 5") && note.tag == "Note 5")
+        {
+            //if button pressed at correct time, note is destroyed
+            Destroy(note);
+            StartCoroutine(Pressed());
+        }
+        if (active && Input.GetButtonDown("Note 6") && note.tag == "Note 6")
+        {
+            //if button pressed at correct time, note is destroyed
+            Destroy(note);
+            StartCoroutine(Pressed());
+        }
+        if (active && Input.GetButtonDown("Note 7") && note.tag == "Note 7")
+        {
+            //if button pressed at correct time, note is destroyed
+            Destroy(note);
+            StartCoroutine(Pressed());
+        }
+        if (active && Input.GetButtonDown("Note 8") && note.tag == "Note 8")
+        {
+            //if button pressed at correct time, note is destroyed
+            Destroy(note);
+            StartCoroutine(Pressed());
+        }
     }
     void OnTriggerEnter2D(Collider2D col)
     {
         active = true;
         string tag = col.gameObject.tag;
-        if (tag == "Note 1" || tag == "Note 2" || tag == "Note 3" || tag == "Note 4")
+        if (tag == "Note 1" || tag == "Note 2" || tag == "Note 3" || tag == "Note 4" || tag=="Note 5" || tag == "Note 6" || tag == "Note 7" || tag == "Note 8")
         {
             note = col.gameObject;
         }
@@ -74,34 +102,11 @@ public class Activator : MonoBehaviour
     {
         //change color of flash depending on button pressed?
         //Need to fix
-        if(Input.GetButtonDown("Note 1"))
-        {
-            sr.color = new Color(26, 133, 236);
-
-        }
-        if (Input.GetButtonDown("Note 2"))
-        {
-            sr.color = new Color(236, 26, 42, 255);
-
-        }
-        if (Input.GetButtonDown("Note 3"))
-        {
-            sr.color = new Color(86, 236, 26, 255);
-
-        }
-        if (Input.GetButtonDown("Note 4"))
-        {
+      
             sr.color = new Color(0, 0, 0);
-
-        }
-        else
-        {
-            sr.color = new Color(0, 0, 0);
-
-        }
+       
         yield return new WaitForSeconds(0.01f);
         sr.color = old;
     }
-
 }
 
