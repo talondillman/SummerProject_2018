@@ -1,21 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CreateNotes : MonoBehaviour {
     public GameObject activator;
-    public GameObject note1;
-    public GameObject note2;
-    public GameObject note3;
-    public GameObject note4;
+    public GameObject note1, note2, note3, note4, note5,note6, note7,note8;
     public GameObject[] notesList;
-    private GameObject noteA;
-    private GameObject noteB;
-    private GameObject noteC;
-    private GameObject noteD;
-
-    private bool danceMode;
-    private bool noteMade;
+    private GameObject noteA, noteB, noteC,noteD, pattern1, pattern2;
+    private bool danceMode, noteMade;
     private string move;
 
     public static CreateNotes instance;
@@ -30,6 +20,10 @@ public class CreateNotes : MonoBehaviour {
         notesList[1] = note2;
         notesList[2] = note3;
         notesList[3] = note4;
+        notesList[4] = note5;
+        notesList[5] = note6;
+        notesList[6] = note7;
+        notesList[7] = note8;
     }
 
     /// <summary>
@@ -50,17 +44,11 @@ public class CreateNotes : MonoBehaviour {
                         //make notes only once
                         if (!noteMade)
                         {
-                            GameObject pattern1 = notesList[Random.Range(0, notesList.Length-1)];
-                            GameObject pattern2 = notesList[Random.Range(0, notesList.Length-1)];
-                            if (pattern1.Equals(pattern2))
-                            {
-                                Destroy(pattern2);
-                                pattern2 = notesList[Random.Range(0, notesList.Length - 1)];
-                            }
-                             noteA = Instantiate(pattern1, new Vector3(17,0,0), Quaternion.identity);
-                             noteB = Instantiate(pattern2, new Vector3(18, 0, 0), Quaternion.identity);
-                             noteC = Instantiate(pattern1, new Vector3(20, 0, 0), Quaternion.identity);
-                             noteD = Instantiate(pattern2, new Vector3(21, 0, 0), Quaternion.identity);
+                            Rand2Pattern();
+                            noteA = SetNote(pattern1, 17);
+                            noteB = SetNote(pattern2, 17.5f);
+                            noteC = SetNote(pattern1, 19);
+                            noteD = SetNote(pattern2, 19.5f);
 
                             noteA.SetActive(true);
                             noteB.SetActive(true);
@@ -68,7 +56,6 @@ public class CreateNotes : MonoBehaviour {
                             noteD.SetActive(true);                      
                          
                             noteMade = true;
-                            
                         }
                         //when last note is hit or goes offscreen, destroy the notes and end turn
                         if ((noteD==null || noteD.transform.position.x < -10) && noteMade)
@@ -109,31 +96,24 @@ public class CreateNotes : MonoBehaviour {
 
                 case "Pop Lock":
                     {
+            
                         activator.SetActive(true);
                         if (!noteMade)
                         {
-                            GameObject pattern1 = notesList[Random.Range(0, notesList.Length - 1)];
-                            GameObject pattern2 = notesList[Random.Range(0, notesList.Length - 1)];
-                            while (pattern1.Equals(pattern2))
-                            {
-                                Destroy(pattern2);
-                                pattern2 = notesList[Random.Range(0, notesList.Length - 1)];
-                            }
-                            noteA = Instantiate(pattern1, new Vector3(17, 0, 0), Quaternion.identity);
-                            noteB = Instantiate(pattern2, new Vector3(19, 0, 0), Quaternion.identity);
-                            noteC = Instantiate(pattern2, new Vector3(20, 0, 0), Quaternion.identity);
-                            noteD = Instantiate(pattern1, new Vector3(24, 0, 0), Quaternion.identity);
+                            Rand2Pattern();
+                            noteA = SetNote(pattern1, 17);
+                            noteB = SetNote(pattern2, 18f);
+                            noteC = SetNote(pattern2, 18.75f);                      
 
                             noteA.SetActive(true);
                             noteB.SetActive(true);
                             noteC.SetActive(true);
-                            noteD.SetActive(true);
 
                             noteMade = true;
                         }
-                        if ((noteD == null || noteD.transform.position.x < -10) && noteMade)
+                        if ((noteC == null || noteC.transform.position.x < -10) && noteMade)
                         {
-                            int damage = 5;
+                            int damage = 4;
                             if (noteA != null)
                             {
                                 damage--;
@@ -146,15 +126,11 @@ public class CreateNotes : MonoBehaviour {
                             {
                                 damage--;
                             }
-                            if (noteD != null)
-                            {
-                                damage--;
-                            }
+
                             EnemyStats.stats.TakeDamage(damage);
                             Destroy(noteA);
                             Destroy(noteB);
                             Destroy(noteC);
-                            Destroy(noteD);
 
                             activator.SetActive(false);
                             noteMade = false;
@@ -163,7 +139,76 @@ public class CreateNotes : MonoBehaviour {
                         }
                         break;
                     }
+                    //currently heals player, fix to raise defense later
+                case "Flow":
+                    {
+                        activator.SetActive(true);
+                        if (!noteMade)
+                        {
+                            Rand2Pattern();
+                            noteA = SetNote(pattern1, 17);
+                            noteB = SetNote(pattern2, 17.5f);
+                            noteC = SetNote(pattern2, 18.25f);
 
+
+                            noteA.SetActive(true);
+                            noteB.SetActive(true);
+                            noteC.SetActive(true);
+
+                            noteMade = true;
+                        }
+                        if ((noteC == null || noteC.transform.position.x < -10) && noteMade)
+                        {
+                            int heal = 0;
+                            if (noteA == null)
+                            {
+                                heal--;
+                            }
+                            if (noteB == null)
+                            {
+                                heal--;
+                            }
+                            if (noteC == null)
+                            {
+                                heal--;
+                            }
+
+                            PlayerStats.stats.TakeDamage(heal);
+                            Destroy(noteA);
+                            Destroy(noteB);
+                            Destroy(noteC);
+
+                            activator.SetActive(false);
+                            noteMade = false;
+                            pickMove("");
+                            BattleMenu.instance.switchDancePhase();
+                        }
+                        break;
+
+                    }
+                case "Charleston":
+                    {
+                        Rand2Pattern();
+
+                        break;
+                    }
+                case "Kick":
+                    {
+                        Rand2Pattern();
+
+                        break;
+                    }
+                case "Wild Jive":
+                    {
+                        Rand2Pattern();
+
+                        break;
+                    }
+                case "B-Boy":
+                    {
+                        Rand2Pattern();
+                        break;
+                    }
                 case "Foe Attack":
                     {
                         int rand = Random.Range(1,10);
@@ -190,5 +235,17 @@ public class CreateNotes : MonoBehaviour {
         danceMode = !danceMode;
         move = moveName;
     }
-
+    private void Rand2Pattern()
+    {
+        pattern1 = notesList[Random.Range(0, notesList.Length - 1)];
+        pattern2 = notesList[Random.Range(0, notesList.Length - 1)];
+        while (pattern1.Equals(pattern2))
+        {
+            pattern2 = notesList[Random.Range(0, notesList.Length - 1)];
+        }
+    }
+    private GameObject SetNote(GameObject type, float x)
+    {
+        return Instantiate(type, new Vector3(x, 0, 0), Quaternion.identity);
+    }
 }

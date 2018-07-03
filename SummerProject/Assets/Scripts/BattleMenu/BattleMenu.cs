@@ -68,9 +68,11 @@ public class BattleMenu : MonoBehaviour
                 p2Menu.SetActive(false);
                 p2TestAction.SetActive(false);
 
-                p1TestAction.SetActive(true);
-                p1Menu.SetActive(true);
-
+                if (!p1Moved)
+                {
+                    p1TestAction.SetActive(true);
+                    p1Menu.SetActive(true);
+                }
                 //If p1 has done an action, switch
                 if (p1Moved && dancePhase)
                 {

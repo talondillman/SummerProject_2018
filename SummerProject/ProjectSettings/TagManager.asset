@@ -11,7 +11,14 @@ TagManager:
   - Note 4
   - Enemy
   - SpawnPoint
+<<<<<<< HEAD
   - Platform
+=======
+  - Note 5
+  - Note 6
+  - Note 8
+  - Note 7
+>>>>>>> origin/Angelique
   layers:
   - Default
   - TransparentFX
