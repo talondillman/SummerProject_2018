@@ -271,6 +271,9 @@ ModelImporter:
     100530: transform7
     100532: transform8
     100534: transform9
+    100536: ambientLight1
+    100538: spotLight1
+    100540: spotLight2
     400000: bottom
     400002: //RootNode
     400004: Dumpster:pCube1
@@ -539,9 +542,23 @@ ModelImporter:
     400530: transform7
     400532: transform8
     400534: transform9
+    400536: ambientLight1
+    400538: spotLight1
+    400540: spotLight2
     2000000: bottom
     2100000: lambert1
     2100002: Fire_Escape_phong1
+    2100004: phongE1
+    2100006: rampShader5
+    2100008: phong3
+    2100010: rampShader4
+    2100012: lambert2
+    2100014: rampShader6
+    2100016: lambert3
+    2100018: rampShader1
+    2100020: phongE2
+    2100022: phong1
+    2100024: phong2
     2300000: Dumpster:pCylinder8
     2300002: Dumpster__2:pCube6
     2300004: Fire_Escape:pCube1
