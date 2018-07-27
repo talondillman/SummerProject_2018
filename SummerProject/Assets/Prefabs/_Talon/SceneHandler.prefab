@@ -471,10 +471,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1838401310662936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f635fe8ed1532f42a35e9101fbeee70, type: 3}
+  m_Script: {fileID: 11500000, guid: 4aa4a79b6f7a67e45876e9054d01d2ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeToWhite: 0.75
+  plyr1health: {fileID: 114989292369677268}
+  plyr2health: {fileID: 114478920210462096}
+  plyr1healthmax: {fileID: 114135131978403732}
+  plyr2healthmax: {fileID: 114876542256845570}
+  totalxp: {fileID: 114233764116640482}
+  totalcredits: {fileID: 0}
+  totalGP: {fileID: 114962885597960170}
 --- !u!114 &114233764116640482
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using TMPro;
 public class LevelLoader : MonoBehaviour {
         //There can only be one
     public static LevelLoader ThisIsTheOnlyOne;
@@ -16,6 +16,26 @@ public class LevelLoader : MonoBehaviour {
 
     public Scene LastScene { get; set; }    // Keep the Last scene name
     [SerializeField] float timeToWhite = 0.75f;
+
+    /// <summary>
+    /// All the stuff for the UI
+    /// </summary>
+    public int Player1Health { get; set; }
+    public int Player2Health { get; set; }
+    public int Player1HealthMax { get; set; }
+    public int Player2HealthMax { get; set; }
+    public int TotalExperience { get; set; }
+    public int TotalCredits { get; set; }
+    public int TotalGP { get; set; }
+    [SerializeField] TMP_Text plyr1health;
+    [SerializeField] TMP_Text plyr2health;
+    [SerializeField] TMP_Text plyr1healthmax;
+    [SerializeField] TMP_Text plyr2healthmax;
+    [SerializeField] TMP_Text totalxp;
+    [SerializeField] TMP_Text totalcredits;
+    [SerializeField] TMP_Text totalGP;
+
+
 
     private void Start()
     {
@@ -37,6 +57,13 @@ public class LevelLoader : MonoBehaviour {
         
         //Make it invisible
         panel.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+    }
+
+    public void UpdateUI()
+    {
+        plyr1health.text = Player1Health.ToString();
+        plyr2health.text = Player2Health.ToString();
+        totalxp.text = TotalExperience.ToString();
     }
     /// <summary>
     /// Loads the scene and places player at a default position
