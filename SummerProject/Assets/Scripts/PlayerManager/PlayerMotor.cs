@@ -69,7 +69,6 @@ public class PlayerMotor : MonoBehaviour {
     public void HitCeiling()
     {
         if(MoveVector.y > 0) {
-            Debug.Log("Moving up changing VerticalVelocity");
             MoveVector = new Vector3(MoveVector.x, 0, MoveVector.z);
         }
     }
