@@ -5,8 +5,8 @@ public class CreateNotes : MonoBehaviour {
     public GameObject activator;
     public GameObject note1, note2, note3, note4, note5,note6, note7,note8;
     public GameObject[] notesList;
-    private GameObject noteA, noteB, noteC,noteD, noteE,noteF, pattern1, pattern2, pattern3;
-    private bool danceMode, noteMade, startDelay;
+    private GameObject noteA, noteB, noteC,noteD, noteE,noteF,noteG,noteH,noteI,noteJ, pattern1, pattern2, pattern3;
+    private bool danceMode, noteMade, startDelay,missedNote;
     private string move;
     private int setRound = 1;
 
@@ -26,6 +26,7 @@ public class CreateNotes : MonoBehaviour {
         notesList[5] = note6;
         notesList[6] = note7;
         notesList[7] = note8;
+        missedNote = false;
     }
 
     /// <summary>
@@ -388,49 +389,67 @@ public class CreateNotes : MonoBehaviour {
                         Debug.Log("Note made is " + noteMade + "  / round " + setRound);
                         if (!noteMade)
                         {
-
-                            while (setRound <= 10)
-                            {
                                 Rand2Pattern();
-                             
-                                if (noteA == null && noteB == null)
-                                {
                                     noteA = SetNote(pattern1, 15f);
-                                    noteB = SetNote(pattern2, 15.25f);
-                                }
-                                //IF two notes are pressed, continue loop, otherwise stop
-                                //note exists and offscreen means miss
-                                if((noteA !=null && (noteA.transform.position.x < -10)) || (noteB!=null && (noteB.transform.position.x < -10)))
-                                {
-                                    Debug.Log("combo failed");
-                                    activator.SetActive(false);
-                                    Destroy(noteA);
-                                    Destroy(noteB);
-                                    pickMove("");
-                                    BattleMenu.instance.switchDancePhase();
-                                }
-                                else
-                                {
-                                    Debug.Log("combo hit!");
-                                    EnemyStats.stats.TakeDamage(damage);//TO FIX: damage random enemies
-                                    ++setRound;
-                                }
-                            }
-                            if (setRound == 10)
-                            {
-                                if ((noteB == null || noteB.transform.position.x < -10))
-                                {
-                                    noteMade = true;
-                                }
+                                    noteB = SetNote(pattern2, 15.55f);
 
-                            }
+                            Rand2Pattern();
+                            noteC = SetNote(pattern1, 18f);
+                            noteD = SetNote(pattern2, 18.55f);
+
+                            Rand2Pattern();
+                            noteE = SetNote(pattern1, 21f);
+                            noteF = SetNote(pattern2, 21.55f);
+
+                            Rand2Pattern();
+                             noteG = SetNote(pattern1, 24f);
+                             noteH = SetNote(pattern2, 24.55f);
+
+                            Rand2Pattern();
+                             noteI = SetNote(pattern1, 27f);
+                             noteJ = SetNote(pattern2, 27.55f);
+
+                            //IF two notes are pressed, continue loop, otherwise stop
+                            //note exists and offscreen means miss
+                           
+                            noteMade = true;
+                            
                         }
                         if (noteMade)
                         {
-                            activator.SetActive(false);
-                            noteMade = false;
-                            pickMove("");
-                            BattleMenu.instance.switchDancePhase();
+                            
+                                if (missedNote)
+                                {
+                                    Debug.Log("combo failed");
+
+                                    Destroy(noteA);
+                                    Destroy(noteB);
+                                    Destroy(noteC);
+                                    Destroy(noteD);
+                                    Destroy(noteE);
+                                    Destroy(noteF);
+                                    Destroy(noteG);
+                                    Destroy(noteH);
+                                    Destroy(noteI);
+                                    Destroy(noteJ);
+                                activator.SetActive(false);
+                                noteMade = false;
+                                pickMove("");
+                                BattleMenu.instance.switchDancePhase();
+                                missedNote = false;
+                                }
+                                else if((noteJ == null || noteJ.transform.position.x < -10))//all notes hit
+                                {
+                                Debug.Log("combo end!");
+                                activator.SetActive(false);
+                                noteMade = false;
+                                pickMove("");
+                                BattleMenu.instance.switchDancePhase();
+                            }
+                            
+                            //check notes hit and do damage
+
+                          
                         }
                         break;
                     }
@@ -494,5 +513,9 @@ public class CreateNotes : MonoBehaviour {
         yield return new WaitForSeconds(0.01f);
         noteMade = true;
 
+    }
+    public void MissedNote()
+    {
+        missedNote = true;
     }
 }
