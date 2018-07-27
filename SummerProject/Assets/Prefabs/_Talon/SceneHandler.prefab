@@ -471,10 +471,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1838401310662936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f635fe8ed1532f42a35e9101fbeee70, type: 3}
+  m_Script: {fileID: 11500000, guid: 4aa4a79b6f7a67e45876e9054d01d2ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeToWhite: 0.75
+  plyr1health: {fileID: 114989292369677268}
+  plyr2health: {fileID: 114478920210462096}
+  plyr1healthmax: {fileID: 114135131978403732}
+  plyr2healthmax: {fileID: 114876542256845570}
+  totalxp: {fileID: 114233764116640482}
+  totalcredits: {fileID: 0}
+  totalGP: {fileID: 114962885597960170}
 --- !u!114 &114233764116640482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -822,7 +829,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 05ee945bee8b58841af7ee6a36722aad, type: 3}
+  m_Texture: {fileID: 2800000, guid: fead039819acf1d4b84176150b65ad33, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1477,7 +1484,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10, y: -172}
-  m_SizeDelta: {x: 87, y: 126}
+  m_SizeDelta: {x: 126, y: 126}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224312756434991054
 RectTransform:
@@ -1633,8 +1640,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 15, y: -23}
-  m_SizeDelta: {x: 87, y: 126}
+  m_AnchoredPosition: {x: 10, y: -23}
+  m_SizeDelta: {x: 126, y: 126}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224993471065779746
 RectTransform:
