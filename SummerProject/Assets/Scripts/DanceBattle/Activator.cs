@@ -26,10 +26,8 @@ public class Activator : MonoBehaviour
         {
             sr.color = new Color(255, 255, 255);
         }
-
-
             //button pressed, activator flashes
-            if (!active && (Input.GetButtonDown("Note 1") || Input.GetButtonDown("Note 2") || Input.GetButtonDown("Note 3") || Input.GetButtonDown("Note 4") || Input.GetButtonDown("Note 5") || Input.GetButtonDown("Note 6") || Input.GetButtonDown("Note 7") || Input.GetButtonDown("Note 8")))
+        if (!active && (Input.GetButtonDown("Note 1") || Input.GetButtonDown("Note 2") || Input.GetButtonDown("Note 3") || Input.GetButtonDown("Note 4") || Input.GetButtonDown("Note 5") || Input.GetButtonDown("Note 6") || Input.GetButtonDown("Note 7") || Input.GetButtonDown("Note 8")))
         {
             StartCoroutine(Pressed());
             
@@ -105,7 +103,7 @@ public class Activator : MonoBehaviour
       
             sr.color = new Color(0, 0, 0);
        
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.001f);
         sr.color = old;
     }
 }
