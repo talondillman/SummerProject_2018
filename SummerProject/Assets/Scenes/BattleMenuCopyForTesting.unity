@@ -2137,6 +2137,7 @@ GameObject:
   - component: {fileID: 480468033}
   - component: {fileID: 480468035}
   - component: {fileID: 480468034}
+  - component: {fileID: 480468036}
   m_Layer: 0
   m_Name: 'Dance Battle '
   m_TagString: Untagged
@@ -2169,6 +2170,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activator: {fileID: 1348322947}
+  count1: {fileID: 0}
+  count2: {fileID: 0}
+  count3: {fileID: 0}
+  countDance: {fileID: 0}
   note1: {fileID: 1285931826767872, guid: 6c331d364ee035447a263b94f94a8f3b, type: 2}
   note2: {fileID: 1420607027081678, guid: 5512eeeac2474444c8581c22dcdd3e57, type: 2}
   note3: {fileID: 1243696127778104, guid: 4979383aba5f1314e8ee4729347f5ab5, type: 2}
@@ -2178,6 +2183,7 @@ MonoBehaviour:
   note7: {fileID: 1056062529665638, guid: 4523cf2e1a4c43f4d9abdfa3e10bcbff, type: 2}
   note8: {fileID: 1370245474749294, guid: 10951c2f68eb9f845b7f91f1cbf52b8f, type: 2}
   notesList: []
+  timeLeft: 3
 --- !u!82 &480468034
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2280,6 +2286,19 @@ AudioListener:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 480468031}
   m_Enabled: 1
+--- !u!114 &480468036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 480468031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625f3c50890377140afebf0eb19b3da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSource: {fileID: 480468034}
+  musicStart: {fileID: 8300000, guid: 6fca8c1e9bca48848bdcf8b736b9ab37, type: 3}
 --- !u!1 &493429093
 GameObject:
   m_ObjectHideFlags: 0

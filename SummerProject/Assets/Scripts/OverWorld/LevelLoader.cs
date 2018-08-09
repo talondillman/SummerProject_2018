@@ -59,6 +59,15 @@ public class LevelLoader : MonoBehaviour {
         panel.GetComponent<Image>().color = new Color(0, 0, 0, 0);
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown("escape"))
+        {
+            Application.Quit();
+            Debug.Log("Application should have Quit");
+        }
+    }
+
     public void UpdateUI()
     {
         plyr1health.text = Player1Health.ToString();
