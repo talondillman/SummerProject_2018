@@ -16,8 +16,8 @@ public class MissedNoteCollider : MonoBehaviour {
 	}
     void OnTriggerEnter2D(Collider2D col)
     {
+       
         Destroy(col);
-        CreateNotes.instance.MissedNote();
-        Debug.Log("Note missed");
+        CreateNotes.instance.MissedNote(col.tag);
     }
 }

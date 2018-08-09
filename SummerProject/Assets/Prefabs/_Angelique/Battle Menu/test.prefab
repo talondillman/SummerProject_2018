@@ -60,9 +60,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'YOU WIN
-
-    CHANGE SCENE'
+  m_Text: -5
 --- !u!222 &222736410661152640
 CanvasRenderer:
   m_ObjectHideFlags: 1
