@@ -112,13 +112,18 @@ public class PlayerStats : MonoBehaviour
 	{
 		groove -= amount;
 		gpSlider.value = groove;
-		lvlLoader.CurrentGP = 17;
 		lvlLoader.CurrentGP -= amount;
-
 		lvlLoader.UpdateUI();
 	}
 
+	public void useGP2(int amount)
+	{
+		groove2 -= amount;
+		gpSlider2.value = groove2;
+		lvlLoader.CurrentGP -= amount;
+		lvlLoader.UpdateUI();
 
+	}
 	public void Reset()
 	{
 		PlayerPrefs.DeleteKey("GP");
