@@ -1532,6 +1532,7 @@ MonoBehaviour:
   gpSlider2: {fileID: 758595468}
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
+  lvlLoader: {fileID: 0}
 --- !u!1 &178590586
 GameObject:
   m_ObjectHideFlags: 0
@@ -2874,13 +2875,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToWhite: 0.75
-  plyr1health: {fileID: 0}
-  plyr2health: {fileID: 0}
-  plyr1healthmax: {fileID: 0}
-  plyr2healthmax: {fileID: 0}
-  totalxp: {fileID: 0}
-  totalcredits: {fileID: 0}
-  totalGP: {fileID: 0}
+  plyr1health: {fileID: 203989295}
+  plyr2health: {fileID: 300564424}
+  plyr1healthmax: {fileID: 933322029}
+  plyr2healthmax: {fileID: 976008215}
+  totalxp: {fileID: 966937065}
+  currentGP: {fileID: 32708289}
 --- !u!4 &397868642
 Transform:
   m_ObjectHideFlags: 0
@@ -2998,7 +2998,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 603134011}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -4173,8 +4173,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0000008, y: 1.0000008, z: 1.0000008}
   m_Children:
-  - {fileID: 424146254}
   - {fileID: 966937064}
+  - {fileID: 424146254}
   - {fileID: 32708288}
   m_Father: {fileID: 1841744141}
   m_RootOrder: 2
@@ -5566,7 +5566,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 603134011}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}

@@ -12,7 +12,7 @@ public class PlayerStats : MonoBehaviour
 	public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
 	public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
 	public static PlayerStats stats;
-	public LevelLoader lvlLoader = LevelLoader.ThisIsTheOnlyOne;
+	private LevelLoader lvlLoader = LevelLoader.ThisIsTheOnlyOne;
 
 
 	bool isDead;                                                // Whether the player is dead.
@@ -66,8 +66,8 @@ public class PlayerStats : MonoBehaviour
 			// Reduce the current health by the damage amount.
 
 			currHealth -= amount;
-			lvlLoader.Player1Health -= amount;
-			lvlLoader.UpdateUI();
+			LevelLoader.ThisIsTheOnlyOne.Player1Health = currHealth;
+			LevelLoader.ThisIsTheOnlyOne.UpdateUI();
 
 			// Set the health bar's value to the current health.
 			healthSlider.value = currHealth;
@@ -78,8 +78,8 @@ public class PlayerStats : MonoBehaviour
 		{
 			// Reduce the current health by the damage amount.
 			currHealth2 -= amount;
-			lvlLoader.Player2Health -= amount;
-			lvlLoader.UpdateUI();
+			LevelLoader.ThisIsTheOnlyOne.Player2Health =currHealth2;
+			LevelLoader.ThisIsTheOnlyOne.UpdateUI();
 
 			// Set the health bar's value to the current health.
 			healthSlider2.value = currHealth2;
@@ -100,8 +100,8 @@ public class PlayerStats : MonoBehaviour
 
 		currHealth -= amount;
 		currHealth2 -= amount;
-		lvlLoader.Player1Health -= amount;
-		lvlLoader.Player2Health -= amount;
+		LevelLoader.ThisIsTheOnlyOne.Player1Health -= amount;
+		LevelLoader.ThisIsTheOnlyOne.Player2Health -= amount;
 		healthSlider.value = currHealth;
 
 
@@ -112,18 +112,14 @@ public class PlayerStats : MonoBehaviour
 	{
 		groove -= amount;
 		gpSlider.value = groove;
-		lvlLoader.CurrentGP -= amount;
-		lvlLoader.UpdateUI();
-	}
 
-	public void useGP2(int amount)
-	{
-		groove2 -= amount;
-		gpSlider2.value = groove2;
-		lvlLoader.CurrentGP -= amount;
-		lvlLoader.UpdateUI();
+		
 
+		int currGP = LevelLoader.ThisIsTheOnlyOne.CurrentGP - amount;
+		LevelLoader.ThisIsTheOnlyOne.CurrentGP = currGP;
+		LevelLoader.ThisIsTheOnlyOne.UpdateUI();
 	}
+	
 	public void Reset()
 	{
 		PlayerPrefs.DeleteKey("GP");

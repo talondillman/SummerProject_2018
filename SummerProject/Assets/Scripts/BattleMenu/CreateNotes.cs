@@ -223,7 +223,9 @@ public class CreateNotes : MonoBehaviour {
                         int damage = 0;
                         if (!noteMade)
                         {
-                            Rand2Pattern();
+							PlayerStats.stats.useGP(2);
+
+							Rand2Pattern();
                             noteA = SetNote(pattern1, 20f);
                             noteB = SetNote(pattern1, 20.5f);
                             noteC = SetNote(pattern1, 21f);
@@ -251,14 +253,8 @@ public class CreateNotes : MonoBehaviour {
                             Destroy(noteE);
                             Destroy(noteF);
 
-                            if (BattleMenu.instance.currentState == BattleMenu.BattleTurns.P1)
-                            {
-                            PlayerStats.stats.useGP(2);
-                            }
-                            else
-                            {
-                                PlayerStats.stats.useGP2(2);
-                            }
+                         
+                         
                             EnemyStats.stats.TakeDamage(damage);//TO FIX: damage all enemies
 
 
@@ -280,7 +276,10 @@ public class CreateNotes : MonoBehaviour {
                         int damage = 1;
                         if (!noteMade)
                         {
-                            Rand3Pattern();
+							PlayerStats.stats.useGP(3);
+
+
+							Rand3Pattern();
                             noteA = SetNote(pattern1, 15f);
                             noteB = SetNote(pattern2, 20f);
                             noteC = SetNote(pattern1, 20.5f);
@@ -293,6 +292,7 @@ public class CreateNotes : MonoBehaviour {
                         }
                         if ((noteF == null || noteF.transform.position.x < -10) && noteMade)
                         {
+
                             if (noteA == null)
                             {
                                 damage++;
@@ -311,14 +311,8 @@ public class CreateNotes : MonoBehaviour {
                             Destroy(noteD);
                             Destroy(noteE);
                             Destroy(noteF);
-                            if (BattleMenu.instance.currentState == BattleMenu.BattleTurns.P1)
-                            {
-                                PlayerStats.stats.useGP(3);
-                            }
-                            else
-                            {
-                                PlayerStats.stats.useGP2(3);
-                            }
+                          
+                         
 
                             EnemyStats.stats.TakeDamage(damage);//TO FIX: damage all enemies
 
@@ -364,7 +358,9 @@ public class CreateNotes : MonoBehaviour {
                         }
                         if (noteMade)
                         {
-                            GameObject[] notes1 = GameObject.FindGameObjectsWithTag("Note 1");
+							PlayerStats.stats.useGP(4);
+
+							GameObject[] notes1 = GameObject.FindGameObjectsWithTag("Note 1");
                             GameObject[] notes2 = GameObject.FindGameObjectsWithTag("Note 2");
                             GameObject[] notes3 = GameObject.FindGameObjectsWithTag("Note 3");
                             GameObject[] notes4 = GameObject.FindGameObjectsWithTag("Note 4");
@@ -411,14 +407,8 @@ public class CreateNotes : MonoBehaviour {
                             noteMade = false;
                             pickMove("");
                             ResetCount();
-                            if (BattleMenu.instance.currentState == BattleMenu.BattleTurns.P1)
-                            {
-                                PlayerStats.stats.useGP(4);
-                            }
-                            else
-                            {
-                                PlayerStats.stats.useGP2(4);
-                            }
+                        
+                       
 
                             BattleMenu.instance.switchDancePhase();
 
@@ -432,7 +422,9 @@ public class CreateNotes : MonoBehaviour {
                         Debug.Log("Note made is " + noteMade + "  / round " + setRound);
                         if (!noteMade)
                         {
-                            Rand2Pattern();
+							PlayerStats.stats.useGP(8);
+
+							Rand2Pattern();
                             noteA = SetNote(pattern1, 15f);
                             noteB = SetNote(pattern2, 15.55f);
 
@@ -456,14 +448,8 @@ public class CreateNotes : MonoBehaviour {
                             //note exists and offscreen means miss
 
                             noteMade = true;
-                            if (BattleMenu.instance.currentState == BattleMenu.BattleTurns.P1)
-                            {
-                                PlayerStats.stats.useGP(8);
-                            }
-                            else
-                            {
-                                PlayerStats.stats.useGP2(8);
-                            }
+                           
+                           
 
                         }
                         if (noteMade)
