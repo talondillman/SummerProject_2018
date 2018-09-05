@@ -125,7 +125,6 @@ public class CameraController : MonoBehaviour {
         targetLookAt = GameObject.Find("targetLookAt") as GameObject;
 
         Instance.TargetLookAt = targetLookAt.transform; //assigning global variable
-
     }
 
 }

@@ -14,8 +14,6 @@ public abstract class MovingObjects : MonoBehaviour {
     protected Transform myTransform;
     protected float width;
 
-    
-
     protected virtual void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
@@ -32,8 +30,9 @@ public abstract class MovingObjects : MonoBehaviour {
         Vector3 lineCastPosition = myTransform.position + myTransform.right * width;
         //Debug.DrawLine(lineCastPosition, lineCastPosition + Vector3.down);
         bool isGrounded = Physics.Linecast(lineCastPosition, lineCastPosition + Vector3.down);
+        bool isBlocked = Physics.Linecast(lineCastPosition, lineCastPosition + myTransform.right);
         //if there is no ground turn around 
-        if (!isGrounded) {
+        if (!isGrounded || !isBlocked) {
             /*
              * Commentted out b/c it's irrelevant right now.
              * Animation will change this.
