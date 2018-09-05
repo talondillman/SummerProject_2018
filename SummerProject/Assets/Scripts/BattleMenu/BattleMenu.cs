@@ -8,8 +8,7 @@ using System.IO;
 public class BattleMenu : MonoBehaviour
 {
 
-    public GameObject p1Menu;
-    public GameObject p2Menu;
+    public GameObject p1Menu, p2Menu, Bboy,Wild,Kick,Charleston;
 
     public GameObject p1TestAction;
     public GameObject p2TestAction;
@@ -28,6 +27,7 @@ public class BattleMenu : MonoBehaviour
     private bool canSwap;
     private bool dancePhase;
     private bool endBattle;
+    public string frontPlayer;
 
     public BattleTurns currentState = BattleTurns.P1;//all fights start with P1
 
@@ -49,6 +49,7 @@ public class BattleMenu : MonoBehaviour
     {
         enemyButtonTest.SetActive(false);
         instance = this;
+        frontPlayer = "P1";
     }
 
     void Update()
@@ -58,8 +59,6 @@ public class BattleMenu : MonoBehaviour
             canSwap = true;
         else
             canSwap = false;
-
-        Debug.Log(currentState);
 
         //switch states depending on person's turn
         switch (currentState)
@@ -72,6 +71,36 @@ public class BattleMenu : MonoBehaviour
                 {
                     p1TestAction.SetActive(true);
                     p1Menu.SetActive(true);
+                    if (PlayerStats.stats.groove <8)
+                    {
+                        Bboy.SetActive(false);
+                        if (PlayerStats.stats.groove < 4)
+                        {
+                            Wild.SetActive(false);
+                            if (PlayerStats.stats.groove < 3)
+                            {
+                                Kick.SetActive(false);
+                                if (PlayerStats.stats.groove < 2)
+                                    Charleston.SetActive(false);
+                                else
+                                    Charleston.SetActive(true);
+                            }
+                            else
+                            {
+                                Kick.SetActive(true);
+                            }
+                        }
+                        else
+                        {
+                            Wild.SetActive(true);
+                        }
+                    }
+                    else
+                    {
+                        Bboy.SetActive(true);
+                    }
+
+
                 }
                 //If p1 has done an action, switch
                 if (p1Moved && dancePhase)
@@ -83,7 +112,10 @@ public class BattleMenu : MonoBehaviour
                         if (!p2Moved)
                             currentState = BattleTurns.P2;
                         else
+                        {
+                            frontPlayer = "P2";//p2 first to move
                             currentState = BattleTurns.ENEMY;
+                        }
                     }
                 }
 
@@ -105,7 +137,10 @@ public class BattleMenu : MonoBehaviour
                         if (!p1Moved)
                             currentState = BattleTurns.P1;
                         else
+                        {
+                            frontPlayer = "P1";//p1 first to move
                             currentState = BattleTurns.ENEMY;
+                        }
                     }
                 }
 
@@ -197,9 +232,9 @@ public class BattleMenu : MonoBehaviour
     }
 public void endBattleState()
     {
-        if(PlayerStats.stats.currentHealth <= 0)
+        if(PlayerStats.stats.currHealth <= 0 && PlayerStats.stats.currHealth2<=0)
         {
-                currentState = BattleTurns.LOSE;//all fights start with P1
+            currentState = BattleTurns.LOSE;//all fights start with P1
             endBattle = true;
 
 }

@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+
 public class CreateNotes : MonoBehaviour {
-    public GameObject activator;
-    public GameObject note1, note2, note3, note4, note5,note6, note7,note8;
+    public GameObject activator, count1, count2, count3, countDance;
+    public GameObject note1, note2, note3, note4, note5, note6, note7, note8;
     public GameObject[] notesList;
-    private GameObject noteA, noteB, noteC,noteD, noteE,noteF, pattern1, pattern2, pattern3;
-    private bool danceMode, noteMade, startDelay;
-    private string move;
+    private GameObject noteA, noteB, noteC, noteD, noteE, noteF, noteG, noteH, noteI, noteJ, pattern1, pattern2, pattern3;
+    private bool danceMode, noteMade, startDelay, missedNote, counted;
+    private string move, noteType;
     private int setRound = 1;
+    public float timeLeft = 3.0f;
 
     public static CreateNotes instance;
     private void Awake()
@@ -26,16 +29,49 @@ public class CreateNotes : MonoBehaviour {
         notesList[5] = note6;
         notesList[6] = note7;
         notesList[7] = note8;
+        missedNote = false;
+        counted = false;
     }
 
     /// <summary>
     /// When an action button is pressed, the dance rhythm game is activated and the proper notes appear
     /// A button must be equipped with the method pickMove to update this!
     /// </summary>
-    void Update () {
-        if (danceMode)
+    void Update() {
+        Debug.Log(counted);
+        if (danceMode && !counted)
         {
-            //move determined by pickMove()
+            timeLeft -= Time.deltaTime;
+            string count = (timeLeft).ToString("0");
+            if (count.Equals("3"))
+            {
+                count3.SetActive(true);
+            }
+            else if (count.Equals("2"))
+            {
+                count3.SetActive(false);
+                count2.SetActive(true);
+            }
+            else if (count.Equals("1"))
+            {
+                count2.SetActive(false);
+                count1.SetActive(true);
+            }
+            else if (count.Equals("0"))
+            {
+                count1.SetActive(false);
+                countDance.SetActive(true);
+            }
+            else if (timeLeft < 0)
+            {
+                countDance.SetActive(false);
+                counted = true;
+
+            }
+        }
+        else if (danceMode && counted)
+        {
+
             switch (move)
             {
                 case "2-4 Step":
@@ -51,16 +87,10 @@ public class CreateNotes : MonoBehaviour {
                             noteB = SetNote(pattern2, 17.5f);
                             noteC = SetNote(pattern1, 19);
                             noteD = SetNote(pattern2, 19.5f);
-
-                           // noteA.SetActive(true);
-                           // noteB.SetActive(true);
-                          //  noteC.SetActive(true);
-                          //  noteD.SetActive(true);                      
-                         
-                            noteMade = true;
+                                                        noteMade = true;
                         }
                         //when last note is hit or goes offscreen, destroy the notes and end turn
-                        if ((noteD==null || noteD.transform.position.x < -10) && noteMade)
+                        if ((noteD == null || noteD.transform.position.x < -10) && noteMade)
                         {
                             int damage = 5;
                             if (noteA != null)
@@ -79,37 +109,36 @@ public class CreateNotes : MonoBehaviour {
                             {
                                 damage--;
                             }
-                            EnemyStats.stats.TakeDamage(damage);
-
                             Destroy(noteA);
                             Destroy(noteB);
                             Destroy(noteC);
                             Destroy(noteD);
 
+                            EnemyStats.stats.TakeDamage(damage);
+
+
                             activator.SetActive(false);
                             pickMove("");//dance mode off, turn off activator 
                             noteMade = false;
+                            ResetCount();
 
                             //dance phase over, BattleMenu switches to next state
                             BattleMenu.instance.switchDancePhase();
-                                                   }
+
+                        }
                         break;
                     }
 
                 case "Pop Lock":
                     {
-            
+
                         activator.SetActive(true);
                         if (!noteMade)
                         {
                             Rand2Pattern();
                             noteA = SetNote(pattern1, 17);
                             noteB = SetNote(pattern2, 18f);
-                            noteC = SetNote(pattern2, 18.75f);                      
-
-                            noteA.SetActive(true);
-                            noteB.SetActive(true);
-                            noteC.SetActive(true);
+                            noteC = SetNote(pattern2, 18.75f);
 
                             noteMade = true;
                         }
@@ -137,11 +166,13 @@ public class CreateNotes : MonoBehaviour {
                             activator.SetActive(false);
                             noteMade = false;
                             pickMove("");
+                            ResetCount();
+
                             BattleMenu.instance.switchDancePhase();
                         }
                         break;
                     }
-                    //currently heals player, fix to raise defense later
+                //currently heals player, fix to raise defense later
                 case "Flow":
                     {
                         activator.SetActive(true);
@@ -151,11 +182,6 @@ public class CreateNotes : MonoBehaviour {
                             noteA = SetNote(pattern1, 17);
                             noteB = SetNote(pattern2, 17.5f);
                             noteC = SetNote(pattern2, 18.25f);
-
-
-                            noteA.SetActive(true);
-                            noteB.SetActive(true);
-                            noteC.SetActive(true);
 
                             noteMade = true;
                         }
@@ -183,6 +209,8 @@ public class CreateNotes : MonoBehaviour {
                             activator.SetActive(false);
                             noteMade = false;
                             pickMove("");
+                            ResetCount();
+
                             BattleMenu.instance.switchDancePhase();
                         }
                         break;
@@ -196,19 +224,13 @@ public class CreateNotes : MonoBehaviour {
                         if (!noteMade)
                         {
                             Rand2Pattern();
-                            noteA = SetNote(pattern1, 19f);
-                            noteB = SetNote(pattern1, 19.33f);
-                            noteC = SetNote(pattern1, 19.66f);
+                            noteA = SetNote(pattern1, 20f);
+                            noteB = SetNote(pattern1, 20.5f);
+                            noteC = SetNote(pattern1, 21f);
                             noteD = SetNote(pattern2, 16f);
-                            noteE = SetNote(pattern2, 16.33f);
-                            noteF = SetNote(pattern2, 16.66f);
+                            noteE = SetNote(pattern2, 16.5f);
+                            noteF = SetNote(pattern2, 17f);
 
-                            noteA.SetActive(true);
-                            noteB.SetActive(true);
-                            noteC.SetActive(true);
-                            noteD.SetActive(true);
-                            noteE.SetActive(true);
-                            noteF.SetActive(true);
 
                             noteMade = true;
                         }
@@ -229,19 +251,27 @@ public class CreateNotes : MonoBehaviour {
                             Destroy(noteE);
                             Destroy(noteF);
 
-
-
+                            if (BattleMenu.instance.currentState == BattleMenu.BattleTurns.P1)
+                            {
+                            PlayerStats.stats.useGP(2);
+                            }
+                            else
+                            {
+                                PlayerStats.stats.useGP2(2);
+                            }
                             EnemyStats.stats.TakeDamage(damage);//TO FIX: damage all enemies
 
-                           
 
-                                activator.SetActive(false);
-                                noteMade = false;
-                                pickMove("");
-                                BattleMenu.instance.switchDancePhase();
-                            
+
+                            activator.SetActive(false);
+                            noteMade = false;
+                            pickMove("");
+                            ResetCount();
+
+                            BattleMenu.instance.switchDancePhase();
+
                         }
-                        
+
                         break;
                     }
                 case "Kick":
@@ -258,12 +288,6 @@ public class CreateNotes : MonoBehaviour {
                             noteE = SetNote(pattern1, 25.75f);
                             noteF = SetNote(pattern2, 26.25f);
 
-                            noteA.SetActive(true);
-                            noteB.SetActive(true);
-                            noteC.SetActive(true);
-                            noteD.SetActive(true);
-                            noteE.SetActive(true);
-                            noteF.SetActive(true);
 
                             noteMade = true;
                         }
@@ -287,12 +311,22 @@ public class CreateNotes : MonoBehaviour {
                             Destroy(noteD);
                             Destroy(noteE);
                             Destroy(noteF);
+                            if (BattleMenu.instance.currentState == BattleMenu.BattleTurns.P1)
+                            {
+                                PlayerStats.stats.useGP(3);
+                            }
+                            else
+                            {
+                                PlayerStats.stats.useGP2(3);
+                            }
 
                             EnemyStats.stats.TakeDamage(damage);//TO FIX: damage all enemies
 
                             activator.SetActive(false);
                             noteMade = false;
                             pickMove("");
+                            ResetCount();
+
                             BattleMenu.instance.switchDancePhase();
 
                         }
@@ -300,8 +334,8 @@ public class CreateNotes : MonoBehaviour {
                     }
                 case "Wild Jive":
                     {
-                        
-                         activator.SetActive(true);
+
+                        activator.SetActive(true);
                         int damage = 1;
                         bool startDelay = false;
                         Debug.Log("Note made is " + noteMade + "  / round " + setRound);
@@ -312,20 +346,20 @@ public class CreateNotes : MonoBehaviour {
                             {
                                 Rand2Pattern();
 
-                                SetNote(pattern1, 15f + setRound * 10);
-                                SetNote(pattern1, 15.5f + setRound * 10);
-                                noteA = SetNote(pattern2, 16f + setRound * 10);
+                                SetNote(pattern1, 15f + setRound * 5);
+                                SetNote(pattern1, 15.5f + setRound * 5);
+                                noteA = SetNote(pattern2, 16f + setRound * 5);
                                 //TO FIX: damage enemy based on noteA pressed; enemy should have note mapped to them at start?
                                 EnemyStats.stats.TakeDamage(damage);//TO FIX: damage all enemies
                                 setRound++;
                             }
                             if (setRound == 6)
                             {
-                                if((noteA == null || noteA.transform.position.x < -10))
+                                if ((noteA == null || noteA.transform.position.x < -10))
                                 {
                                     noteMade = true;
                                 }
-                            
+
                             }
                         }
                         if (noteMade)
@@ -376,6 +410,16 @@ public class CreateNotes : MonoBehaviour {
                             activator.SetActive(false);
                             noteMade = false;
                             pickMove("");
+                            ResetCount();
+                            if (BattleMenu.instance.currentState == BattleMenu.BattleTurns.P1)
+                            {
+                                PlayerStats.stats.useGP(4);
+                            }
+                            else
+                            {
+                                PlayerStats.stats.useGP2(4);
+                            }
+
                             BattleMenu.instance.switchDancePhase();
 
                         }
@@ -388,56 +432,143 @@ public class CreateNotes : MonoBehaviour {
                         Debug.Log("Note made is " + noteMade + "  / round " + setRound);
                         if (!noteMade)
                         {
+                            Rand2Pattern();
+                            noteA = SetNote(pattern1, 15f);
+                            noteB = SetNote(pattern2, 15.55f);
 
-                            while (setRound <= 10)
-                            {
-                                Rand2Pattern();
-                             
-                                if (noteA == null && noteB == null)
-                                {
-                                    noteA = SetNote(pattern1, 15f);
-                                    noteB = SetNote(pattern2, 15.25f);
-                                }
-                                //IF two notes are pressed, continue loop, otherwise stop
-                                //note exists and offscreen means miss
-                                if((noteA !=null && (noteA.transform.position.x < -10)) || (noteB!=null && (noteB.transform.position.x < -10)))
-                                {
-                                    Debug.Log("combo failed");
-                                    activator.SetActive(false);
-                                    Destroy(noteA);
-                                    Destroy(noteB);
-                                    pickMove("");
-                                    BattleMenu.instance.switchDancePhase();
-                                }
-                                else
-                                {
-                                    Debug.Log("combo hit!");
-                                    EnemyStats.stats.TakeDamage(damage);//TO FIX: damage random enemies
-                                    ++setRound;
-                                }
-                            }
-                            if (setRound == 10)
-                            {
-                                if ((noteB == null || noteB.transform.position.x < -10))
-                                {
-                                    noteMade = true;
-                                }
+                            Rand2Pattern();
+                            noteC = SetNote(pattern1, 18f);
+                            noteD = SetNote(pattern2, 18.55f);
 
+                            Rand2Pattern();
+                            noteE = SetNote(pattern1, 21f);
+                            noteF = SetNote(pattern2, 21.55f);
+
+                            Rand2Pattern();
+                            noteG = SetNote(pattern1, 24f);
+                            noteH = SetNote(pattern2, 24.55f);
+
+                            Rand2Pattern();
+                            noteI = SetNote(pattern1, 27f);
+                            noteJ = SetNote(pattern2, 27.55f);
+
+                            //IF two notes are pressed, continue loop, otherwise stop
+                            //note exists and offscreen means miss
+
+                            noteMade = true;
+                            if (BattleMenu.instance.currentState == BattleMenu.BattleTurns.P1)
+                            {
+                                PlayerStats.stats.useGP(8);
                             }
+                            else
+                            {
+                                PlayerStats.stats.useGP2(8);
+                            }
+
                         }
                         if (noteMade)
                         {
-                            activator.SetActive(false);
-                            noteMade = false;
-                            pickMove("");
-                            BattleMenu.instance.switchDancePhase();
+
+                            if(noteA==null && noteB == null)
+                            {
+                                damage++;
+                            }
+                            if (noteC == null && noteD == null)
+                            {
+                                damage++;
+                            }
+                            if (noteE == null && noteF == null)
+                            {
+                                damage++;
+                            }
+                            if (noteG == null && noteH == null)
+                            {
+                                damage++;
+                            }
+                            if (noteI == null && noteJ == null)
+                            {
+                                damage++;
+                            }
+                            if (missedNote)
+                            {
+                                Debug.Log("combo failed");
+
+                                Destroy(noteA);
+                                Destroy(noteB);
+                                Destroy(noteC);
+                                Destroy(noteD);
+                                Destroy(noteE);
+                                Destroy(noteF);
+                                Destroy(noteG);
+                                Destroy(noteH);
+                                Destroy(noteI);
+                                Destroy(noteJ);
+                                activator.SetActive(false);
+                                noteMade = false;
+                                EnemyStats.stats.TakeDamage(damage);
+
+                                pickMove("");
+                                ResetCount();
+
+                                BattleMenu.instance.switchDancePhase();
+                                missedNote = false;
+                            }
+                            else if ((noteJ == null || noteJ.transform.position.x < -10))//all notes hit
+                            {
+                                Debug.Log("combo end!");
+                                activator.SetActive(false);
+                                noteMade = false;
+                                EnemyStats.stats.TakeDamage(damage+1);
+
+                                pickMove("");
+                                ResetCount();
+
+                                BattleMenu.instance.switchDancePhase();
+                            }
+
+                            //check notes hit and do damage
+
+
                         }
                         break;
                     }
                 case "Foe Attack":
                     {
-                        int rand = Random.Range(1,10);
-                        PlayerStats.stats.TakeDamage(rand);
+                        int randMoveType=Random.Range(1,2);
+                        int severity = Random.Range(1, 3);
+                        switch (randMoveType)
+                        {
+                            case 1:
+                                {
+                                 //attacks player in front
+                                 if(severity==1)
+                                  PlayerStats.stats.TakeDamage(3);
+                                    if (severity == 2)
+                                        PlayerStats.stats.TakeDamage(5);
+                                    if (severity == 3)
+                                        PlayerStats.stats.TakeDamage(7);
+
+                                    break; }
+                            case 2:
+                                {                                  
+                                    //attacks both players
+
+                                    if (severity == 1)
+                                        PlayerStats.stats.TakeDamageBoth(2);
+                                    if (severity == 2)
+                                        PlayerStats.stats.TakeDamageBoth(4);
+                                    if (severity == 3)
+                                        PlayerStats.stats.TakeDamageBoth(5);
+
+                                    break;
+                                }
+
+                        }
+                    
+
+
+
+                        int rand = Random.Range(1, 10);
                         //deals rand damage to player
                         pickMove("");
                         BattleMenu.instance.switchDancePhase();
@@ -449,7 +580,10 @@ public class CreateNotes : MonoBehaviour {
         else
         {
             activator.SetActive(false);
-        }
+            counted = false;
+        }        
+            //move determined by pickMove()
+            
 	}
     /// <summary>
     /// Used to change the switch statement in Update
@@ -494,5 +628,17 @@ public class CreateNotes : MonoBehaviour {
         yield return new WaitForSeconds(0.01f);
         noteMade = true;
 
+    }
+    public void MissedNote()
+    {
+        missedNote = true;
+    }
+    public void MissedNote(string tag)
+    {
+        missedNote = true;
+    }
+    private void ResetCount()
+    {
+        timeLeft = 3.0f;
     }
 }
