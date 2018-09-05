@@ -28,7 +28,7 @@ public abstract class MovingObjects : MonoBehaviour {
     protected void CheckGround()
     {
         Vector3 lineCastPosition = myTransform.position + myTransform.right * width;
-        //Debug.DrawLine(lineCastPosition, lineCastPosition + Vector3.down);
+        Debug.DrawLine(lineCastPosition, lineCastPosition + Vector3.down);
         bool isGrounded = Physics.Linecast(lineCastPosition, lineCastPosition + Vector3.down);
         bool isBlocked = Physics.Linecast(lineCastPosition, lineCastPosition + myTransform.right);
         //if there is no ground turn around 

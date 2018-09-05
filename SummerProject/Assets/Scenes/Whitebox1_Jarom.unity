@@ -3003,11 +3003,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98af040a0f01ba54fa636c8c373cd32a, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &363371975 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4909846426824404, guid: 6ca151c4b30d355418c90d9c2880ce53,
-    type: 2}
-  m_PrefabInternal: {fileID: 1716326617}
 --- !u!1 &369507020
 GameObject:
   m_ObjectHideFlags: 0
@@ -3693,7 +3688,7 @@ Prefab:
         type: 2}
       propertyPath: player
       value: 
-      objectReference: {fileID: 363371975}
+      objectReference: {fileID: 0}
     - target: {fileID: 33866589311889444, guid: 422c0df648fe9994bb319dceada5ed7d,
         type: 2}
       propertyPath: m_Mesh
@@ -15716,7 +15711,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4925367634082090, guid: 38eed90d975d30e44be04c91f24a5447, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.54
+      value: -1.074
       objectReference: {fileID: 0}
     - target: {fileID: 4925367634082090, guid: 38eed90d975d30e44be04c91f24a5447, type: 2}
       propertyPath: m_LocalRotation.x
@@ -15724,7 +15719,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4925367634082090, guid: 38eed90d975d30e44be04c91f24a5447, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4925367634082090, guid: 38eed90d975d30e44be04c91f24a5447, type: 2}
       propertyPath: m_LocalRotation.z
@@ -15732,11 +15727,20 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4925367634082090, guid: 38eed90d975d30e44be04c91f24a5447, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4925367634082090, guid: 38eed90d975d30e44be04c91f24a5447, type: 2}
       propertyPath: m_RootOrder
       value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 4925367634082090, guid: 38eed90d975d30e44be04c91f24a5447, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 114356067851098950, guid: 38eed90d975d30e44be04c91f24a5447,
+        type: 2}
+      propertyPath: loadScene
+      value: BattleMenuCopyForTesting
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38eed90d975d30e44be04c91f24a5447, type: 2}
@@ -23241,17 +23245,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2097670133}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f635fe8ed1532f42a35e9101fbeee70, type: 3}
+  m_Script: {fileID: 11500000, guid: 4aa4a79b6f7a67e45876e9054d01d2ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeToWhite: 0.75
-  plyr1health: {fileID: 1351292428}
-  plyr2health: {fileID: 1270519108}
-  plyr1healthmax: {fileID: 1178745950}
-  plyr2healthmax: {fileID: 155251670}
-  totalxp: {fileID: 2110526829}
+  plyr1health: {fileID: 0}
+  plyr2health: {fileID: 0}
+  plyr1healthmax: {fileID: 0}
+  plyr2healthmax: {fileID: 0}
+  totalxp: {fileID: 0}
   totalcredits: {fileID: 0}
-  totalGP: {fileID: 1306006969}
+  totalGP: {fileID: 0}
 --- !u!4 &2097670135
 Transform:
   m_ObjectHideFlags: 0

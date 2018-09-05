@@ -26,14 +26,16 @@ public class LevelLoader : MonoBehaviour {
     public int Player2HealthMax { get; set; }
     public int TotalExperience { get; set; }
     public int TotalCredits { get; set; }
-    public int TotalGP { get; set; }
+    public int MaxGP { get; set; }
+    public int CurrentGP { get; set; }
     [SerializeField] TMP_Text plyr1health;
     [SerializeField] TMP_Text plyr2health;
     [SerializeField] TMP_Text plyr1healthmax;
     [SerializeField] TMP_Text plyr2healthmax;
     [SerializeField] TMP_Text totalxp;
     [SerializeField] TMP_Text totalcredits;
-    [SerializeField] TMP_Text totalGP;
+    [SerializeField] TMP_Text currentGP;
+    [SerializeField] TMP_Text maxGP;
 
 
 
@@ -58,7 +60,9 @@ public class LevelLoader : MonoBehaviour {
         //Make it invisible
         panel.GetComponent<Image>().color = new Color(0, 0, 0, 0);
     }
-
+    /// <summary>
+    /// Makes it so you can leave the game
+    /// </summary>
     void Update()
     {
         if (Input.GetKeyDown("escape"))
@@ -73,6 +77,7 @@ public class LevelLoader : MonoBehaviour {
         plyr1health.text = Player1Health.ToString();
         plyr2health.text = Player2Health.ToString();
         totalxp.text = TotalExperience.ToString();
+        currentGP.text = CurrentGP.ToString();
     }
     /// <summary>
     /// Loads the scene and places player at a default position
