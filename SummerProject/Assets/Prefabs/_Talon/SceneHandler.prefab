@@ -480,8 +480,7 @@ MonoBehaviour:
   plyr1healthmax: {fileID: 114135131978403732}
   plyr2healthmax: {fileID: 114876542256845570}
   totalxp: {fileID: 114233764116640482}
-  totalcredits: {fileID: 0}
-  totalGP: {fileID: 114962885597960170}
+  currentGP: {fileID: 114962885597960170}
 --- !u!114 &114233764116640482
 MonoBehaviour:
   m_ObjectHideFlags: 1

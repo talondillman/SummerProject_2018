@@ -33,10 +33,8 @@ public class LevelLoader : MonoBehaviour {
     [SerializeField] TMP_Text plyr1healthmax;
     [SerializeField] TMP_Text plyr2healthmax;
     [SerializeField] TMP_Text totalxp;
-    [SerializeField] TMP_Text totalcredits;
+    //[SerializeField] TMP_Text totalcredits;
     [SerializeField] TMP_Text currentGP;
-    [SerializeField] TMP_Text maxGP;
-
 
 
     private void Start()
@@ -54,11 +52,27 @@ public class LevelLoader : MonoBehaviour {
         Player = GameObject.FindGameObjectWithTag("Player");
         MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 
+        setEverything();
         // Find the panel to make the screen go black for a second.
         panel = GameObject.Find("Canvas/BlackScreen");
         
         //Make it invisible
         panel.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+    }
+
+    public void setEverything()
+    {
+        Debug.Log("Init values for UI");
+        Player1HealthMax = 22;
+        Player1Health = Player1HealthMax;
+        Player2HealthMax = 27;
+        Player2Health = Player2HealthMax;
+        TotalExperience = 356;
+        TotalCredits = 0;
+        MaxGP = 19;
+        CurrentGP = MaxGP;
+        UpdateUI();
+
     }
     /// <summary>
     /// Makes it so you can leave the game
