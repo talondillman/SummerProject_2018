@@ -89,6 +89,19 @@ public class PlayerStats : MonoBehaviour
             Death();
         }
     }
+
+    public void TakeDamageBoth(int amount)
+    {
+     
+            currHealth -= amount;
+       
+            healthSlider.value = currHealth;
+
+            currHealth2 -= amount;
+
+            // Set the health bar's value to the current health.
+            healthSlider2.value = currHealth2;       
+    }
     public void useGP(int amount)
     {
         groove -= amount;
