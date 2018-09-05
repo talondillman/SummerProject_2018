@@ -251,14 +251,9 @@ public class CreateNotes : MonoBehaviour {
                             Destroy(noteE);
                             Destroy(noteF);
 
-                            if (BattleMenu.instance.currentState == BattleMenu.BattleTurns.P1)
-                            {
+                          
                             PlayerStats.stats.useGP(2);
-                            }
-                            else
-                            {
-                                PlayerStats.stats.useGP2(2);
-                            }
+                           
                             EnemyStats.stats.TakeDamage(damage);//TO FIX: damage all enemies
 
 
@@ -311,14 +306,9 @@ public class CreateNotes : MonoBehaviour {
                             Destroy(noteD);
                             Destroy(noteE);
                             Destroy(noteF);
-                            if (BattleMenu.instance.currentState == BattleMenu.BattleTurns.P1)
-                            {
+                          
                                 PlayerStats.stats.useGP(3);
-                            }
-                            else
-                            {
-                                PlayerStats.stats.useGP2(3);
-                            }
+                          
 
                             EnemyStats.stats.TakeDamage(damage);//TO FIX: damage all enemies
 
@@ -411,14 +401,10 @@ public class CreateNotes : MonoBehaviour {
                             noteMade = false;
                             pickMove("");
                             ResetCount();
-                            if (BattleMenu.instance.currentState == BattleMenu.BattleTurns.P1)
-                            {
+                            
                                 PlayerStats.stats.useGP(4);
-                            }
-                            else
-                            {
-                                PlayerStats.stats.useGP2(4);
-                            }
+                            
+
 
                             BattleMenu.instance.switchDancePhase();
 
@@ -456,14 +442,9 @@ public class CreateNotes : MonoBehaviour {
                             //note exists and offscreen means miss
 
                             noteMade = true;
-                            if (BattleMenu.instance.currentState == BattleMenu.BattleTurns.P1)
-                            {
+                         
                                 PlayerStats.stats.useGP(8);
-                            }
-                            else
-                            {
-                                PlayerStats.stats.useGP2(8);
-                            }
+                         
 
                         }
                         if (noteMade)
