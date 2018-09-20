@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class EnemyStats : MonoBehaviour {
 
 
-    public int startingHealth = 100;                            // The amount of health the player starts the game with.
+    private int startingHealth = 1;                            // The amount of health the player starts the game with.
     public int currentHealth;                                   // The current health the player has.
     public Slider healthSlider;                                 // Reference to the UI's health bar.
     public float flashSpeed = 5f;                               // The speed the damageImage will fade at.

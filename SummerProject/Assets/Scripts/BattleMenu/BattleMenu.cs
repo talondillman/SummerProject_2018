@@ -188,8 +188,9 @@ public class BattleMenu : MonoBehaviour
                 winText.SetActive(true);
 
                 //Scene lastScene = LevelLoader.ThisIsTheOnlyOne.LastScene;
-                 LevelLoader.ThisIsTheOnlyOne.LoadScene("WhiteBoxStreet", false);
-               // Debug.Log(lastScene.name);
+                Debug.Log("Last Scene " + LevelLoader.ThisIsTheOnlyOne.LastScene);
+                LevelLoader.ThisIsTheOnlyOne.LoadScene(LevelLoader.ThisIsTheOnlyOne.LastScene, false);
+                
                // LevelLoader.ThisIsTheOnlyOne.LoadScene(lastScene.name, false);
 
                 //SETUP BATTLE

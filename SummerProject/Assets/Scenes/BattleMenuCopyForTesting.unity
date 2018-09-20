@@ -1532,7 +1532,6 @@ MonoBehaviour:
   gpSlider2: {fileID: 758595468}
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
-  lvlLoader: {fileID: 0}
 --- !u!1 &178590586
 GameObject:
   m_ObjectHideFlags: 0
@@ -3282,6 +3281,7 @@ GameObject:
   - component: {fileID: 480468033}
   - component: {fileID: 480468035}
   - component: {fileID: 480468034}
+  - component: {fileID: 480468036}
   m_Layer: 0
   m_Name: 'Dance Battle '
   m_TagString: Untagged
@@ -3328,6 +3328,7 @@ MonoBehaviour:
   note8: {fileID: 1370245474749294, guid: 10951c2f68eb9f845b7f91f1cbf52b8f, type: 2}
   notesList: []
   timeLeft: 3
+  noteStartPos: 5
 --- !u!82 &480468034
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3337,8 +3338,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7e889f1826d24374ca76a6043ae3ff0c, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 6420a917bf1347f4da36077604f9d5d6, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -3430,6 +3431,19 @@ AudioListener:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 480468031}
   m_Enabled: 1
+--- !u!114 &480468036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 480468031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625f3c50890377140afebf0eb19b3da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSource: {fileID: 480468034}
+  musicStart: {fileID: 8300000, guid: 6fca8c1e9bca48848bdcf8b736b9ab37, type: 3}
 --- !u!1 &493429093
 GameObject:
   m_ObjectHideFlags: 0
@@ -9950,17 +9964,17 @@ Prefab:
     - target: {fileID: 224863541807956108, guid: dd2810e7cc5094b4a92330b97f0ba4ff,
         type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.45
       objectReference: {fileID: 0}
     - target: {fileID: 224863541807956108, guid: dd2810e7cc5094b4a92330b97f0ba4ff,
         type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.08715578
       objectReference: {fileID: 0}
     - target: {fileID: 224863541807956108, guid: dd2810e7cc5094b4a92330b97f0ba4ff,
         type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.010297264
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224863541807956108, guid: dd2810e7cc5094b4a92330b97f0ba4ff,
         type: 2}
@@ -9970,7 +9984,7 @@ Prefab:
     - target: {fileID: 224863541807956108, guid: dd2810e7cc5094b4a92330b97f0ba4ff,
         type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.999947
+      value: 0.9961947
       objectReference: {fileID: 0}
     - target: {fileID: 224863541807956108, guid: dd2810e7cc5094b4a92330b97f0ba4ff,
         type: 2}
@@ -9980,12 +9994,12 @@ Prefab:
     - target: {fileID: 224863541807956108, guid: dd2810e7cc5094b4a92330b97f0ba4ff,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -1.92
+      value: -1.12
       objectReference: {fileID: 0}
     - target: {fileID: 224863541807956108, guid: dd2810e7cc5094b4a92330b97f0ba4ff,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.01
+      value: 0.68
       objectReference: {fileID: 0}
     - target: {fileID: 224863541807956108, guid: dd2810e7cc5094b4a92330b97f0ba4ff,
         type: 2}
@@ -10079,7 +10093,7 @@ Prefab:
     - target: {fileID: 224863541807956108, guid: dd2810e7cc5094b4a92330b97f0ba4ff,
         type: 2}
       propertyPath: m_LocalScale.y
-      value: 0.63
+      value: 0.3475809
       objectReference: {fileID: 0}
     - target: {fileID: 61263181603619062, guid: dd2810e7cc5094b4a92330b97f0ba4ff,
         type: 2}
@@ -10099,7 +10113,7 @@ Prefab:
     - target: {fileID: 224863541807956108, guid: dd2810e7cc5094b4a92330b97f0ba4ff,
         type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 1.18
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 61263181603619062, guid: dd2810e7cc5094b4a92330b97f0ba4ff,
         type: 2}
@@ -10114,7 +10128,17 @@ Prefab:
     - target: {fileID: 224863541807956108, guid: dd2810e7cc5094b4a92330b97f0ba4ff,
         type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.7
+      value: 0.386201
+      objectReference: {fileID: 0}
+    - target: {fileID: 224863541807956108, guid: dd2810e7cc5094b4a92330b97f0ba4ff,
+        type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 224863541807956108, guid: dd2810e7cc5094b4a92330b97f0ba4ff,
+        type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.55171573
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd2810e7cc5094b4a92330b97f0ba4ff, type: 2}

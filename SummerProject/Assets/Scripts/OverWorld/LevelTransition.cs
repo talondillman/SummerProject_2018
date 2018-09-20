@@ -10,7 +10,7 @@ public class LevelTransition : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.tag == "Player") {
-            Destroy(this.gameObject);
+            Destroy(this);
             LevelLoader.ThisIsTheOnlyOne.LoadScene(loadScene, true);
         }
         //SceneManager.LoadScene(loadScene, LoadSceneMode.Additive);

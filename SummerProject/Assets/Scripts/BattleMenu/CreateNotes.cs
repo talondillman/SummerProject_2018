@@ -12,6 +12,9 @@ public class CreateNotes : MonoBehaviour {
     private string move, noteType;
     private int setRound = 1;
     public float timeLeft = 3.0f;
+    public float noteStartPos = 5f;
+    private float noteSpeed = 2f;
+    private float quarterBeat;
 
     public static CreateNotes instance;
     private void Awake()
@@ -31,13 +34,15 @@ public class CreateNotes : MonoBehaviour {
         notesList[7] = note8;
         missedNote = false;
         counted = false;
+
+        quarterBeat = (noteSpeed / 31) * 4;
     }
 
     /// <summary>
     /// When an action button is pressed, the dance rhythm game is activated and the proper notes appear
     /// A button must be equipped with the method pickMove to update this!
     /// </summary>
-    void Update() {
+    void FixedUpdate() {
         Debug.Log(counted);
         if (danceMode && !counted)
         {
@@ -83,14 +88,14 @@ public class CreateNotes : MonoBehaviour {
                         if (!noteMade)
                         {
                             Rand2Pattern();
-                            noteA = SetNote(pattern1, 17);
-                            noteB = SetNote(pattern2, 17.5f);
-                            noteC = SetNote(pattern1, 19);
-                            noteD = SetNote(pattern2, 19.5f);
-                                                        noteMade = true;
+                            noteA = SetNote(pattern1, noteStartPos);
+                            noteB = SetNote(pattern2, noteStartPos + (quarterBeat*2));
+                            noteC = SetNote(pattern1, noteStartPos + (quarterBeat*8));
+                            noteD = SetNote(pattern2, noteStartPos + (quarterBeat*10));
+                            noteMade = true;
                         }
                         //when last note is hit or goes offscreen, destroy the notes and end turn
-                        if ((noteD == null || noteD.transform.position.x < -10) && noteMade)
+                        if ((noteD == null || noteD.transform.position.x < -2.5) && noteMade)
                         {
                             int damage = 5;
                             if (noteA != null)
@@ -136,9 +141,9 @@ public class CreateNotes : MonoBehaviour {
                         if (!noteMade)
                         {
                             Rand2Pattern();
-                            noteA = SetNote(pattern1, 17);
-                            noteB = SetNote(pattern2, 18f);
-                            noteC = SetNote(pattern2, 18.75f);
+                            noteA = SetNote(pattern1, noteStartPos);
+                            noteB = SetNote(pattern2, noteStartPos + 1f);
+                            noteC = SetNote(pattern2, noteStartPos + 1.75f);
 
                             noteMade = true;
                         }
@@ -607,7 +612,7 @@ public class CreateNotes : MonoBehaviour {
 
     private GameObject SetNote(GameObject type, float x)
     {
-        return Instantiate(type, new Vector3(x, 0, 0), Quaternion.identity);
+        return Instantiate(type, new Vector3(x, activator.transform.position.y, activator.transform.position.z), Quaternion.identity);
     }
     IEnumerator DelayNoteMade()
     {

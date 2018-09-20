@@ -7,6 +7,7 @@ using TMPro;
 public class LevelLoader : MonoBehaviour {
         //There can only be one
     public static LevelLoader ThisIsTheOnlyOne;
+    private int DebugID;
     
     private Transform SpawnPoint;// Spawn Point to move palyer to on load scene
     private GameObject panel;   // The black loading screen panel
@@ -14,7 +15,7 @@ public class LevelLoader : MonoBehaviour {
     private GameObject MainCamera; // The Main Camera for the OverWorld
     private Transform EndBattleSpawnPoint;   // Where the player should spawn after a battle
 
-    public Scene LastScene { get; set; }    // Keep the Last scene name
+    public string LastScene;    // Keep the Last scene name
     [SerializeField] float timeToWhite = 0.75f;
 
     /// <summary>
@@ -45,6 +46,7 @@ public class LevelLoader : MonoBehaviour {
         }
 
         ThisIsTheOnlyOne = this;
+        DebugID = Random.Range(0, 10000);
         Debug.Log("this is the only one = " + ThisIsTheOnlyOne.ToString());
         GameObject.DontDestroyOnLoad(this.gameObject);
 
@@ -99,7 +101,7 @@ public class LevelLoader : MonoBehaviour {
     /// <param name="scene"> The scene to load </param>
     public void LoadScene(string scene)
     {
-        LastScene = SceneManager.GetActiveScene();
+        LastScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
 
         Invoke("GoBlack", 1.5f);
@@ -119,7 +121,7 @@ public class LevelLoader : MonoBehaviour {
     /// <param name="spawnPoint"> The spawn point to place the player </param>
     public void LoadScene(string scene, int spawnPoint)
     {
-        LastScene = SceneManager.GetActiveScene();
+        LastScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
 
         Invoke("GoBlack", 0f);
@@ -138,24 +140,28 @@ public class LevelLoader : MonoBehaviour {
     /// <param name="DanceBattle"> Whether or not it's a dance battle</param>
     public void LoadScene(string scene, bool DanceBattle)
     {
+       
         if (!DanceBattle) {
-            LastScene = SceneManager.GetActiveScene();
-            EndBattleSpawnPoint.position = new Vector3(Player.transform.position.x -1, Player.transform.position.y, Player.transform.position.z) ;
-            Debug.Log("SpawnPoint = " + EndBattleSpawnPoint.ToString());
+            //EndBattleSpawnPoint.position = new Vector3(Player.transform.position.x -1, Player.transform.position.y, Player.transform.position.z) ;
+            //Debug.Log("SpawnPoint = " + EndBattleSpawnPoint.ToString());
         }
-        SceneManager.LoadScene(scene, LoadSceneMode.Single);        
+              
 
         if (DanceBattle) {
-            Debug.Log("Making player inactive");
+            LastScene = SceneManager.GetActiveScene().name;
+            Debug.Log("Last Scene " + LastScene);
             MainCamera.SetActive(false);
             Player.SetActive(false);
         } else {
             Debug.Log("Making player active");
             MainCamera.SetActive(true);
             Player.SetActive(true);
-            Player.transform.position = EndBattleSpawnPoint.position;
+           // Player.transform.position = EndBattleSpawnPoint.position;
         }
+        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+       
     }
+    
 
     void GoBlack()
     {
