@@ -38,6 +38,7 @@ public class Activator : MonoBehaviour
             //if button pressed at correct time, note is destroyed
             Destroy(note);
             StartCoroutine(Pressed());
+            active = false;
         }
 
         if (active &&  Input.GetButtonDown("Note 2") && note.tag == "Note 2" )
@@ -45,63 +46,75 @@ public class Activator : MonoBehaviour
             //if button pressed at correct time, note is destroyed
             Destroy(note);
             StartCoroutine(Pressed());
+            active = false;
         }
         if (active && Input.GetButtonDown("Note 3") && note.tag == "Note 3" )
         {
             //if button pressed at correct time, note is destroyed
             Destroy(note);
             StartCoroutine(Pressed());
+            active = false;
         }
         if (active && Input.GetButtonDown("Note 4") && note.tag == "Note 4" )
         {
             //if button pressed at correct time, note is destroyed
             Destroy(note);
             StartCoroutine(Pressed());
+            active = false;
         }
         if (active && Input.GetButtonDown("Note 5") && note.tag == "Note 5")
         {
             //if button pressed at correct time, note is destroyed
             Destroy(note);
             StartCoroutine(Pressed());
+            active = false;
         }
         if (active && Input.GetButtonDown("Note 6") && note.tag == "Note 6")
         {
             //if button pressed at correct time, note is destroyed
             Destroy(note);
             StartCoroutine(Pressed());
+            active = false;
         }
         if (active && Input.GetButtonDown("Note 7") && note.tag == "Note 7")
         {
             //if button pressed at correct time, note is destroyed
             Destroy(note);
             StartCoroutine(Pressed());
+            active = false;
         }
         if (active && Input.GetButtonDown("Note 8") && note.tag == "Note 8")
         {
             //if button pressed at correct time, note is destroyed
             Destroy(note);
             StartCoroutine(Pressed());
+            active = false;
         }
     }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         active = true;
         string tag = col.gameObject.tag;
+        Debug.Log("Note Collision: " + tag);
+
         if (tag == "Note 1" || tag == "Note 2" || tag == "Note 3" || tag == "Note 4" || tag=="Note 5" || tag == "Note 6" || tag == "Note 7" || tag == "Note 8")
         {
             note = col.gameObject;
         }
     }
+
     private void OnTriggerExit2D(Collider2D col)
     {
         active = false;
     }
+
     IEnumerator Pressed()
     {
         //change color of flash depending on button pressed?
         //Need to fix
       
-            sr.color = new Color(0, 0, 0);
+        sr.color = new Color(0, 0, 0);
        
         yield return new WaitForSeconds(0.001f);
         sr.color = old;

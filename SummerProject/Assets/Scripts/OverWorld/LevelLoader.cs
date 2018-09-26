@@ -152,11 +152,13 @@ public class LevelLoader : MonoBehaviour {
             Debug.Log("Last Scene " + LastScene);
             MainCamera.SetActive(false);
             Player.SetActive(false);
+            gameObject.transform.Find("Canvas").Find("Lower_Right_UI").gameObject.SetActive(false);
         } else {
             Debug.Log("Making player active");
             MainCamera.SetActive(true);
             Player.SetActive(true);
-           // Player.transform.position = EndBattleSpawnPoint.position;
+            gameObject.transform.Find("Canvas").Find("Lower_Right_UI").gameObject.SetActive(true);
+            // Player.transform.position = EndBattleSpawnPoint.position;
         }
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
        
