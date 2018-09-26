@@ -7,7 +7,7 @@ public class Activator : MonoBehaviour
     SpriteRenderer sr;
     // public KeyCode key;
     bool active = false;
-    GameObject note;
+    Queue<GameObject> notes = new Queue<GameObject>();
     Color old;
 
 
@@ -32,61 +32,62 @@ public class Activator : MonoBehaviour
             StartCoroutine(Pressed());
             
         }
+        
         //button pressed should correspond with type of note
-        if (active && Input.GetButtonDown("Note 1") && note.tag == "Note 1")
+        if (active && Input.GetButtonDown("Note 1") && notes.Peek().tag == "Note 1")
         {
             //if button pressed at correct time, note is destroyed
-            Destroy(note);
+            Destroy(notes.Dequeue());
             StartCoroutine(Pressed());
             active = false;
         }
 
-        if (active &&  Input.GetButtonDown("Note 2") && note.tag == "Note 2" )
+        if (active &&  Input.GetButtonDown("Note 2") && notes.Peek().tag == "Note 2" )
         {
             //if button pressed at correct time, note is destroyed
-            Destroy(note);
+            Destroy(notes.Dequeue());
             StartCoroutine(Pressed());
             active = false;
         }
-        if (active && Input.GetButtonDown("Note 3") && note.tag == "Note 3" )
+        if (active && Input.GetButtonDown("Note 3") && notes.Peek().tag == "Note 3" )
         {
             //if button pressed at correct time, note is destroyed
-            Destroy(note);
+            Destroy(notes.Dequeue());
             StartCoroutine(Pressed());
             active = false;
         }
-        if (active && Input.GetButtonDown("Note 4") && note.tag == "Note 4" )
+        if (active && Input.GetButtonDown("Note 4") && notes.Peek().tag == "Note 4" )
         {
             //if button pressed at correct time, note is destroyed
-            Destroy(note);
+            Destroy(notes.Dequeue());
             StartCoroutine(Pressed());
             active = false;
         }
-        if (active && Input.GetButtonDown("Note 5") && note.tag == "Note 5")
+        if (active && Input.GetButtonDown("Note 5") && notes.Peek().tag == "Note 5")
         {
             //if button pressed at correct time, note is destroyed
-            Destroy(note);
+            Destroy(notes.Dequeue());
             StartCoroutine(Pressed());
             active = false;
         }
-        if (active && Input.GetButtonDown("Note 6") && note.tag == "Note 6")
+        if (active && Input.GetButtonDown("Note 6") && notes.Peek().tag == "Note 6")
         {
             //if button pressed at correct time, note is destroyed
-            Destroy(note);
+            Destroy(notes.Dequeue());
             StartCoroutine(Pressed());
             active = false;
         }
-        if (active && Input.GetButtonDown("Note 7") && note.tag == "Note 7")
+        if (active && Input.GetButtonDown("Note 7") && notes.Peek().tag == "Note 7")
         {
             //if button pressed at correct time, note is destroyed
-            Destroy(note);
+            Destroy(notes.Dequeue());
             StartCoroutine(Pressed());
             active = false;
         }
-        if (active && Input.GetButtonDown("Note 8") && note.tag == "Note 8")
+        if (active && Input.GetButtonDown("Note 8") && notes.Peek().tag == "Note 8")
         {
             //if button pressed at correct time, note is destroyed
-            Destroy(note);
+            Destroy(notes.Dequeue());
             StartCoroutine(Pressed());
             active = false;
         }
@@ -100,13 +101,14 @@ public class Activator : MonoBehaviour
 
         if (tag == "Note 1" || tag == "Note 2" || tag == "Note 3" || tag == "Note 4" || tag=="Note 5" || tag == "Note 6" || tag == "Note 7" || tag == "Note 8")
         {
-            note = col.gameObject;
+            notes.Enqueue(col.gameObject);
         }
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
         active = false;
+        notes.Dequeue();
     }
 
     IEnumerator Pressed()

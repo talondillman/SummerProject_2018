@@ -6282,15 +6282,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4580315432075250, guid: 1dc1f735c1cea264691ee1a1d2e9bf64, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -4.42
+      value: -2.3
       objectReference: {fileID: 0}
     - target: {fileID: 4580315432075250, guid: 1dc1f735c1cea264691ee1a1d2e9bf64, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.02
+      value: 0.68
       objectReference: {fileID: 0}
     - target: {fileID: 4580315432075250, guid: 1dc1f735c1cea264691ee1a1d2e9bf64, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.013863329
+      value: -1.96
       objectReference: {fileID: 0}
     - target: {fileID: 4580315432075250, guid: 1dc1f735c1cea264691ee1a1d2e9bf64, type: 2}
       propertyPath: m_LocalRotation.x
@@ -7574,7 +7574,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d290977cfbacdf142884615dce3c9759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 20
   currentHealth: 0
   healthSlider: {fileID: 150498276}
   flashSpeed: 5

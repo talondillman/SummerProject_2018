@@ -10,11 +10,11 @@ public class CreateNotes : MonoBehaviour {
     private GameObject noteA, noteB, noteC, noteD, noteE, noteF, noteG, noteH, noteI, noteJ, pattern1, pattern2, pattern3;
     private bool danceMode, noteMade, startDelay, missedNote, counted;
     private string move, noteType;
-    private int setRound = 1;
     public float timeLeft = 3.0f;
-    public float noteStartPos = 5f;
+    public float noteStartPos = 3f;
     private float noteSpeed = 2f;
     private float quarterBeat;
+    private int setRound = 0;
 
     public static CreateNotes instance;
     private void Awake()
@@ -43,7 +43,6 @@ public class CreateNotes : MonoBehaviour {
     /// A button must be equipped with the method pickMove to update this!
     /// </summary>
     void FixedUpdate() {
-        Debug.Log(counted);
         if (danceMode && !counted)
         {
             timeLeft -= Time.deltaTime;
@@ -74,9 +73,9 @@ public class CreateNotes : MonoBehaviour {
 
             }
         }
+        ///countdown over, start move
         else if (danceMode && counted)
         {
-
             switch (move)
             {
                 case "2-4 Step":
@@ -88,10 +87,10 @@ public class CreateNotes : MonoBehaviour {
                         if (!noteMade)
                         {
                             Rand2Pattern();
-                            noteA = SetNote(pattern1, noteStartPos);
-                            noteB = SetNote(pattern2, noteStartPos + (quarterBeat*2));
-                            noteC = SetNote(pattern1, noteStartPos + (quarterBeat*8));
-                            noteD = SetNote(pattern2, noteStartPos + (quarterBeat*10));
+                            noteA = SetNote(pattern1, 0);
+                            noteB = SetNote(pattern2, quarterBeat*2);
+                            noteC = SetNote(pattern1, quarterBeat*8);
+                            noteD = SetNote(pattern2, quarterBeat*10);
                             noteMade = true;
                         }
                         //when last note is hit or goes offscreen, destroy the notes and end turn
@@ -141,9 +140,9 @@ public class CreateNotes : MonoBehaviour {
                         if (!noteMade)
                         {
                             Rand2Pattern();
-                            noteA = SetNote(pattern1, noteStartPos);
-                            noteB = SetNote(pattern2, noteStartPos + 1f);
-                            noteC = SetNote(pattern2, noteStartPos + 1.75f);
+                            noteA = SetNote(pattern1, 0);
+                            noteB = SetNote(pattern2, (quarterBeat*2));
+                            noteC = SetNote(pattern2, (quarterBeat*4));
 
                             noteMade = true;
                         }
@@ -184,9 +183,9 @@ public class CreateNotes : MonoBehaviour {
                         if (!noteMade)
                         {
                             Rand2Pattern();
-                            noteA = SetNote(pattern1, 17);
-                            noteB = SetNote(pattern2, 17.5f);
-                            noteC = SetNote(pattern2, 18.25f);
+                            noteA = SetNote(pattern1, 0);
+                            noteB = SetNote(pattern2, quarterBeat);
+                            noteC = SetNote(pattern2, (quarterBeat*5));
 
                             noteMade = true;
                         }
@@ -231,12 +230,12 @@ public class CreateNotes : MonoBehaviour {
 							PlayerStats.stats.useGP(2);
 
 							Rand2Pattern();
-                            noteA = SetNote(pattern1, 20f);
-                            noteB = SetNote(pattern1, 20.5f);
-                            noteC = SetNote(pattern1, 21f);
-                            noteD = SetNote(pattern2, 16f);
-                            noteE = SetNote(pattern2, 16.5f);
-                            noteF = SetNote(pattern2, 17f);
+                            noteA = SetNote(pattern1, 0);
+                            noteB = SetNote(pattern1, (quarterBeat*0.666f));
+                            noteC = SetNote(pattern1, (quarterBeat*1.333f));
+                            noteD = SetNote(pattern2, (quarterBeat*3));
+                            noteE = SetNote(pattern2, (quarterBeat*3.666f));
+                            noteF = SetNote(pattern2, (quarterBeat*4.333f));
 
 
                             noteMade = true;
@@ -285,12 +284,12 @@ public class CreateNotes : MonoBehaviour {
 
 
 							Rand3Pattern();
-                            noteA = SetNote(pattern1, 15f);
-                            noteB = SetNote(pattern2, 20f);
-                            noteC = SetNote(pattern1, 20.5f);
-                            noteD = SetNote(pattern3, 24.5f);
-                            noteE = SetNote(pattern1, 25.75f);
-                            noteF = SetNote(pattern2, 26.25f);
+                            noteA = SetNote(pattern1, 0);
+                            noteB = SetNote(pattern2, quarterBeat*4);
+                            noteC = SetNote(pattern1, quarterBeat*6);
+                            noteD = SetNote(pattern3, quarterBeat*10);
+                            noteE = SetNote(pattern1, quarterBeat*12);
+                            noteF = SetNote(pattern2, quarterBeat*14);
 
 
                             noteMade = true;
@@ -333,11 +332,10 @@ public class CreateNotes : MonoBehaviour {
                     }
                 case "Wild Jive":
                     {
-
+                        
                         activator.SetActive(true);
                         int damage = 1;
-                        bool startDelay = false;
-                        Debug.Log("Note made is " + noteMade + "  / round " + setRound);
+                        //bool startDelay = false;
                         if (!noteMade)
                         {
 
@@ -345,9 +343,9 @@ public class CreateNotes : MonoBehaviour {
                             {
                                 Rand2Pattern();
 
-                                SetNote(pattern1, 15f + setRound * 5);
-                                SetNote(pattern1, 15.5f + setRound * 5);
-                                noteA = SetNote(pattern2, 16f + setRound * 5);
+                                SetNote(pattern1, quarterBeat*(setRound*8));
+                                SetNote(pattern1, quarterBeat*(setRound*8+2));
+                                noteA = SetNote(pattern2, quarterBeat*(setRound*8+4));
                                 //TO FIX: damage enemy based on noteA pressed; enemy should have note mapped to them at start?
                                 EnemyStats.stats.TakeDamage(damage);//TO FIX: damage all enemies
                                 setRound++;
@@ -424,30 +422,29 @@ public class CreateNotes : MonoBehaviour {
                     {
                         activator.SetActive(true);
                         int damage = 1;
-                        Debug.Log("Note made is " + noteMade + "  / round " + setRound);
                         if (!noteMade)
                         {
 							PlayerStats.stats.useGP(8);
 
 							Rand2Pattern();
-                            noteA = SetNote(pattern1, 15f);
-                            noteB = SetNote(pattern2, 15.55f);
+                            noteA = SetNote(pattern1, 0);
+                            noteB = SetNote(pattern2, quarterBeat);
 
                             Rand2Pattern();
-                            noteC = SetNote(pattern1, 18f);
-                            noteD = SetNote(pattern2, 18.55f);
+                            noteC = SetNote(pattern1, quarterBeat*4);
+                            noteD = SetNote(pattern2, quarterBeat*5);
 
                             Rand2Pattern();
-                            noteE = SetNote(pattern1, 21f);
-                            noteF = SetNote(pattern2, 21.55f);
+                            noteE = SetNote(pattern1, quarterBeat*8);
+                            noteF = SetNote(pattern2, quarterBeat*9);
 
                             Rand2Pattern();
-                            noteG = SetNote(pattern1, 24f);
-                            noteH = SetNote(pattern2, 24.55f);
+                            noteG = SetNote(pattern1, quarterBeat*12);
+                            noteH = SetNote(pattern2, quarterBeat*13);
 
                             Rand2Pattern();
-                            noteI = SetNote(pattern1, 27f);
-                            noteJ = SetNote(pattern2, 27.55f);
+                            noteI = SetNote(pattern1, quarterBeat*16);
+                            noteJ = SetNote(pattern2, quarterBeat*17);
 
                             //IF two notes are pressed, continue loop, otherwise stop
                             //note exists and offscreen means miss
@@ -610,9 +607,9 @@ public class CreateNotes : MonoBehaviour {
         }
     }
 
-    private GameObject SetNote(GameObject type, float x)
+    private GameObject SetNote(GameObject type, float xOffset)
     {
-        return Instantiate(type, new Vector3(x, activator.transform.position.y, activator.transform.position.z), Quaternion.identity);
+        return Instantiate(type, new Vector3(noteStartPos + xOffset, activator.transform.position.y, activator.transform.position.z), Quaternion.identity);
     }
     IEnumerator DelayNoteMade()
     {
