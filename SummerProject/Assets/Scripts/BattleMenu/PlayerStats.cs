@@ -2,12 +2,14 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-
+/// <summary>
+/// Keeps track of the players stats between Scenes. 
+/// </summary>
 public class PlayerStats : MonoBehaviour
 {
 	public int maxHealth = 50;                            // The amount of health the player starts the game with.
 	public int currHealth, currHealth2;                                   // The current health the player has.
-	public int groove, groove2;
+	public int groove;
 	public Slider healthSlider, gpSlider, healthSlider2, gpSlider2;                                 // Reference to the UI's health bar.
 	public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
 	public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
@@ -25,7 +27,6 @@ public class PlayerStats : MonoBehaviour
 		currHealth = maxHealth;
 		currHealth2 = maxHealth;
 		groove = 15;
-		groove2 = 15;
 	}
 
 	private void Start()
@@ -35,7 +36,6 @@ public class PlayerStats : MonoBehaviour
 		currHealth = maxHealth;
 		currHealth2 = maxHealth;
 		groove = 15;
-		groove2 = 15;
 
 	}
 

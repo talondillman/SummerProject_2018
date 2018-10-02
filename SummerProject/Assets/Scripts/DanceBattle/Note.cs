@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// A beat that is pressed in DanceBattle to deal damage.
+/// </summary>
 public class Note : MonoBehaviour {
     Rigidbody2D rb;
     public float speed;

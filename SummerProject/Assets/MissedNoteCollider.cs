@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// The cleanup tool for the dancebattle - deletes the note and reports that it has been missed
+/// </summary>
 public class MissedNoteCollider : MonoBehaviour {
     GameObject note;
 
@@ -16,8 +18,8 @@ public class MissedNoteCollider : MonoBehaviour {
 	}
     void OnTriggerEnter2D(Collider2D col)
     {
-       
-        Destroy(col);
-        CreateNotes.instance.MissedNote(col.tag);
+		//Activator.instance.MissedNote();
+        Destroy(col.gameObject);//destroys the missed note
+        CreateNotes.instance.MissedNote();//notifies the CreateNote class so the damage is adjusted
     }
 }
