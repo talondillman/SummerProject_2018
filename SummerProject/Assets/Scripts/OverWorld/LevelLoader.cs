@@ -7,6 +7,8 @@ using TMPro;
 public class LevelLoader : MonoBehaviour {
         //There can only be one
     public static LevelLoader ThisIsTheOnlyOne;
+    private Transform catalogue;
+    Dictionary<Transform, bool> ignore = new Dictionary<Transform, bool>();
     private int DebugID;
     
     private Transform SpawnPoint;// Spawn Point to move palyer to on load scene
@@ -37,8 +39,10 @@ public class LevelLoader : MonoBehaviour {
     //[SerializeField] TMP_Text totalcredits;
     [SerializeField] TMP_Text currentGP;
 
-
-    private void Start()
+    /// <summary>
+    /// Initialize all my object references
+    /// </summary>
+    private void Awake()
     {
         if (ThisIsTheOnlyOne != null) {
             Destroy(this.gameObject);
@@ -46,22 +50,43 @@ public class LevelLoader : MonoBehaviour {
         }
 
         ThisIsTheOnlyOne = this;
-        DebugID = Random.Range(0, 10000);
-        Debug.Log("this is the only one = " + ThisIsTheOnlyOne.ToString());
-        GameObject.DontDestroyOnLoad(this.gameObject);
+        //DebugID = Random.Range(0, 10000);
+        //Debug.Log("this is the only one = " + ThisIsTheOnlyOne.ToString()+ " " + DebugID); 
+        //GameObject.DontDestroyOnLoad(this.gameObject);
 
         //Find the player && camera
         Player = GameObject.FindGameObjectWithTag("Player");
         MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 
+        ignore[transform] = true;
+        catalogue = new GameObject().transform;
+        catalogue.name = "_" + SceneManager.GetActiveScene().name;
+
+        foreach (Transform t in Object.FindObjectsOfType<Transform>()) {
+            Debug.Log("Im in the foreach loop.");
+            if (ignore.ContainsKey(t)) { Debug.Log("This object is ignored : " + t.ToString()); continue; }
+
+            if(t.parent == null) {
+                Debug.Log("This object parent set to catlogue : " + t.ToString());
+                t.SetParent(catalogue);
+            }
+        }
+    }
+    /// <summary>
+    /// Call other funtions and scripts here
+    /// </summary>
+    public void Start()
+    {
         setEverything();
         // Find the panel to make the screen go black for a second.
         panel = GameObject.Find("Canvas/BlackScreen");
-        
+
         //Make it invisible
         panel.GetComponent<Image>().color = new Color(0, 0, 0, 0);
     }
-
+    /// <summary>
+    /// Sets all the GUI variables
+    /// </summary>
     public void setEverything()
     {
         Debug.Log("Init values for UI");
@@ -87,7 +112,9 @@ public class LevelLoader : MonoBehaviour {
             Debug.Log("Application should have Quit");
         }
     }
-
+    /// <summary>
+    /// Updates the GUI with appropriate data when called
+    /// </summary>
     public void UpdateUI()
     {
         plyr1health.text = Player1Health.ToString();
@@ -122,7 +149,7 @@ public class LevelLoader : MonoBehaviour {
     public void LoadScene(string scene, int spawnPoint)
     {
         LastScene = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        SceneManager.LoadScene(scene, LoadSceneMode.Additive);
 
         Invoke("GoBlack", 0f);
         Invoke("GoBack", timeToWhite);
@@ -140,13 +167,7 @@ public class LevelLoader : MonoBehaviour {
     /// <param name="DanceBattle"> Whether or not it's a dance battle</param>
     public void LoadScene(string scene, bool DanceBattle)
     {
-       
-        if (!DanceBattle) {
-            //EndBattleSpawnPoint.position = new Vector3(Player.transform.position.x -1, Player.transform.position.y, Player.transform.position.z) ;
-            //Debug.Log("SpawnPoint = " + EndBattleSpawnPoint.ToString());
-        }
               
-
         if (DanceBattle) {
             LastScene = SceneManager.GetActiveScene().name;
             Debug.Log("Last Scene " + LastScene);
@@ -164,6 +185,11 @@ public class LevelLoader : MonoBehaviour {
        
     }
     
+    IEnumerator LoadSceneLoop(string scene)
+    {
+        SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+        yield return null;
+    }
 
     void GoBlack()
     {

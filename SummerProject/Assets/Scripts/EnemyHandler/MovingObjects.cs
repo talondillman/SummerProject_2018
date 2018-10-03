@@ -8,14 +8,17 @@ using UnityEngine;
 public abstract class MovingObjects : MonoBehaviour {
 
     public float speed;
+   
 
     protected BoxCollider boxCollider;
     protected Rigidbody myRigidBody;
     protected Transform myTransform;
     protected float width;
 
+    
     protected virtual void Start()
     {
+        
         boxCollider = GetComponent<BoxCollider>();
         myRigidBody = GetComponent<Rigidbody>();
         myTransform = GetComponent<Transform>();
@@ -27,10 +30,13 @@ public abstract class MovingObjects : MonoBehaviour {
     /// </summary>
     protected void CheckGround()
     {
-        Vector3 lineCastPosition = myTransform.position + myTransform.right * width;
+        //right = RedLine  -- forward = BlueLine
+        Vector3 lineCastPosition = myTransform.position + myTransform.forward * width;
+
         Debug.DrawLine(lineCastPosition, lineCastPosition + Vector3.down);
         bool isGrounded = Physics.Linecast(lineCastPosition, lineCastPosition + Vector3.down);
         bool isBlocked = Physics.Linecast(lineCastPosition, -lineCastPosition + myTransform.right);
+
         //if there is no ground turn around 
         if (!isGrounded || !isBlocked) {
             /*
@@ -40,8 +46,6 @@ public abstract class MovingObjects : MonoBehaviour {
             Vector3 currentRotation = myTransform.eulerAngles;
             currentRotation.y += 180;
             myTransform.eulerAngles = currentRotation;
-        }
-
-       
+        }  
     }
 }
