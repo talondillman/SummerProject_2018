@@ -11,7 +11,9 @@ public class PlayerMotor : MonoBehaviour {
     public float JumpSpeed = 6f;
     
     public Vector3 MoveVector { get; set; }
-    public float VeritcalVelocity { get; set; } 
+    public float VeritcalVelocity { get; set; }
+
+    Animator pAnimator;
 
     private void Awake()
     {
@@ -21,6 +23,8 @@ public class PlayerMotor : MonoBehaviour {
         }
         Instance = this;
         DontDestroyOnLoad(Instance);
+
+        pAnimator = gameObject.GetComponent<Animator>();
     }
 
     public void UpdateMotor () {

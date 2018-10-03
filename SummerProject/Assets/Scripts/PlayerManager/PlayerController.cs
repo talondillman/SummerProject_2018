@@ -66,7 +66,10 @@ public class PlayerController : MonoBehaviour {
         HandleActionInput();
         
         PlayerMotor.Instance.UpdateMotor();
-       
+
+        //Change Animation State Variables
+        gameObject.GetComponent<Animator>().SetBool("Grounded", CharacterController.isGrounded);
+        gameObject.GetComponent<Animator>().SetFloat("Running", CharacterController.velocity.x);
 	}
     /// <summary>
     /// For Camera smoothing
