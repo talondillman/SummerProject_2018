@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class DoorHandler : MonoBehaviour {
 	
-	public Transform player;
-	public float distance = 2.0f;
-    public string travelToSceneNamed;
-    public int spawnPoint;
+	private Transform player;
+	[SerializeField] float distance = 2.0f;
+    [SerializeField] string travelToSceneNamed;
+    [SerializeField] int spawnID;
 
 	// Use this for initialization
 	void Awake () {
@@ -31,7 +28,7 @@ public class DoorHandler : MonoBehaviour {
             if (travelToSceneNamed == "" || travelToSceneNamed == null)
                 print("No Scene Specified");
             else
-                LevelLoader.ThisIsTheOnlyOne.LoadScene(travelToSceneNamed, spawnPoint);
+                LevelLoader.ThisIsTheOnlyOne.LoadScene(travelToSceneNamed, spawnID);
         }
     }
 }

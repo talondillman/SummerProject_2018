@@ -43,6 +43,7 @@ public class CameraController : MonoBehaviour {
         }
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
+        UsingExistingOrCreateNewMainCamera();
     }
 
     private void Start()
@@ -108,7 +109,7 @@ public class CameraController : MonoBehaviour {
         GameObject targetLookAt;
 
         //Look for a camera, if it exits assign it, otherwise make it
-        if (Camera.main != null) {
+        /*if (Camera.main != null) {
             Debug.Log("temp Camera = existing");
             tempCamera = Camera.main.gameObject;
         } else {
@@ -117,11 +118,10 @@ public class CameraController : MonoBehaviour {
             tempCamera.AddComponent<Camera>();
             tempCamera.tag = "MainCamera";
         }
-
+        */
         //tempCamera.AddComponent<CameraController>();
-        Instance = tempCamera.GetComponent<CameraController>() as CameraController;
-
-        //Find where to look at
+        //Instance = tempCamera.GetComponent<CameraController>() as CameraController;
+                //Find where to look at
         targetLookAt = GameObject.Find("targetLookAt") as GameObject;
 
         Instance.TargetLookAt = targetLookAt.transform; //assigning global variable

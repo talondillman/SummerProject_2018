@@ -4,14 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+
+
+// @TODO realistically all that should be in this script is the level loading stuff and the catalogues to keep track of shared objects I would like to move all the UI stuff to a different script for easier management and adaptibility.
+
 public class LevelLoader : MonoBehaviour {
         //There can only be one
-    public static LevelLoader ThisIsTheOnlyOne;
-    private Transform catalogue;
-    Dictionary<Transform, bool> ignore = new Dictionary<Transform, bool>();
+    public static LevelLoader ThisIsTheOnlyOne; //The only instance of this GameObject that should ever exist.
+    private Transform catalogue;//The catalogue of everthing in the scene you don't want to keep
+    private Transform shared;//Everything that you want to keep track of from scene to scene
+    Dictionary<Transform, bool> ignore = new Dictionary<Transform, bool>();//Everthing in the scene should be stored in here w/ a boolean declaring it worth keeping / not keeping
     private int DebugID;
     
     private Transform SpawnPoint;// Spawn Point to move palyer to on load scene
+    private int spawnID; //Find correct SpawnPoint
     private GameObject panel;   // The black loading screen panel
     private GameObject Player;  // The player. to Keep eyes on him. AT ALL TIMES
     private GameObject MainCamera; // The Main Camera for the OverWorld
@@ -40,7 +46,8 @@ public class LevelLoader : MonoBehaviour {
     [SerializeField] TMP_Text currentGP;
 
     /// <summary>
-    /// Initialize all my object references
+    /// Initialize all object references
+    /// adds everything to where it belongs into the ignore dictionary and everything else set parent to the catalogue transform object
     /// </summary>
     private void Awake()
     {
@@ -50,40 +57,62 @@ public class LevelLoader : MonoBehaviour {
         }
 
         ThisIsTheOnlyOne = this;
-        //DebugID = Random.Range(0, 10000);
-        //Debug.Log("this is the only one = " + ThisIsTheOnlyOne.ToString()+ " " + DebugID); 
-        //GameObject.DontDestroyOnLoad(this.gameObject);
-
-        //Find the player && camera
+        
         Player = GameObject.FindGameObjectWithTag("Player");
         MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 
+        //Create the shared area
+        shared = new GameObject().transform;
+        shared.name = "_Shared";
+        Player.transform.SetParent(shared);
+        MainCamera.transform.SetParent(shared);
+
+        //Setup ignored elements
         ignore[transform] = true;
+        ignore[Player.transform] = true;
+        ignore[MainCamera.transform] = true;
+        ignore[shared] = true;
+
+        updateCatalogue();
+        
+    }
+    /// <summary>
+    /// Call other funtions and scripts here
+    /// Makes sure the Black load screen is invisble.
+    /// </summary>
+    public void Start()
+    {
+        setEverything();
+
+        // Find the panel to make the screen go black for a second.
+        panel = GameObject.Find("Canvas/BlackScreen");
+        //Make sure it is invisible
+        panel.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+    }
+
+    /// <summary>
+    /// Runs through every object in the scene and puts it in the catalogue
+    /// </summary>
+    private void updateCatalogue()
+    {
+        //Create catalogue of gameObjects
         catalogue = new GameObject().transform;
         catalogue.name = "_" + SceneManager.GetActiveScene().name;
 
         foreach (Transform t in Object.FindObjectsOfType<Transform>()) {
-            Debug.Log("Im in the foreach loop.");
-            if (ignore.ContainsKey(t)) { Debug.Log("This object is ignored : " + t.ToString()); continue; }
 
-            if(t.parent == null) {
+            if (ignore.ContainsKey(t)) {
+                Debug.Log("This object is ignored : " + t.ToString());
+                continue;
+            }
+
+            if (t.parent == null) {
                 Debug.Log("This object parent set to catlogue : " + t.ToString());
                 t.SetParent(catalogue);
             }
         }
     }
-    /// <summary>
-    /// Call other funtions and scripts here
-    /// </summary>
-    public void Start()
-    {
-        setEverything();
-        // Find the panel to make the screen go black for a second.
-        panel = GameObject.Find("Canvas/BlackScreen");
 
-        //Make it invisible
-        panel.GetComponent<Image>().color = new Color(0, 0, 0, 0);
-    }
     /// <summary>
     /// Sets all the GUI variables
     /// </summary>
@@ -129,7 +158,7 @@ public class LevelLoader : MonoBehaviour {
     public void LoadScene(string scene)
     {
         LastScene = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        SceneManager.LoadScene(scene, LoadSceneMode.Additive);
 
         Invoke("GoBlack", 1.5f);
         Invoke("GoBack", 1.5f);
@@ -137,7 +166,6 @@ public class LevelLoader : MonoBehaviour {
         Vector3 spawnhere;
         SpawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform.GetChild(0);
         spawnhere = SpawnPoint.position;
-        Debug.Log("Finding player and moving");
         Player.transform.position = spawnhere;
     }
 
@@ -145,29 +173,37 @@ public class LevelLoader : MonoBehaviour {
     /// Loads the scene and puts the player at a particular place
     /// </summary>
     /// <param name="scene"> The scene to load </param>
-    /// <param name="spawnPoint"> The spawn point to place the player </param>
-    public void LoadScene(string scene, int spawnPoint)
+    /// <param name="spawnID"> The spawn point to place the player </param>
+    public void LoadScene(string scene, int spawnID)
     {
+        Debug.Log("in loadScene with scene " + scene + " and spawnID: " + spawnID);
         LastScene = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+        this.spawnID = spawnID;
+
+        StartCoroutine(LoadSceneLoop(scene));
 
         Invoke("GoBlack", 0f);
         Invoke("GoBack", timeToWhite);
 
         Vector3 spawnhere;
-        SpawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform.GetChild(spawnPoint);
+        SpawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform.GetChild(spawnID);
         spawnhere = SpawnPoint.position;
-        Debug.Log("Finding player and moving");
+        Debug.Log("Finding player and moving.");
         Player.transform.position = spawnhere;
     }
     /// <summary>
-    /// Loads the Dance Battle Scene
+    /// Loads the Dance Battle Scene or transitions back from the Dance Battle.
     /// </summary>
     /// <param name="scene"> name of the scene to load </param>
     /// <param name="DanceBattle"> Whether or not it's a dance battle</param>
     public void LoadScene(string scene, bool DanceBattle)
     {
-              
+
+        Invoke("GoBlack", 0f);
+        Invoke("GoBack", timeToWhite);
+
+        // @TODO I want to NOT disable the player and the camera. Instead we can use the same character w/ the additive scene loading.
+        // @TODO this would likely mean the camera's LOOKAT trait would be used rather than what @Angelique is using.
         if (DanceBattle) {
             LastScene = SceneManager.GetActiveScene().name;
             Debug.Log("Last Scene " + LastScene);
@@ -179,16 +215,31 @@ public class LevelLoader : MonoBehaviour {
             MainCamera.SetActive(true);
             Player.SetActive(true);
             gameObject.transform.Find("Canvas").Find("Lower_Right_UI").gameObject.SetActive(true);
-            // Player.transform.position = EndBattleSpawnPoint.position;
+            Player.transform.position = EndBattleSpawnPoint.position;
         }
-        SceneManager.LoadScene(scene, LoadSceneMode.Single);
-       
+
+        StartCoroutine(LoadSceneLoop(scene));
     }
-    
+    /// <summary>
+    /// Destroys the catalougue from the previous scene and creates a new one in the new scene.
+    /// </summary>
+    /// <param name="scene">The scene to move to</param>
+    /// <returns></returns>
     IEnumerator LoadSceneLoop(string scene)
     {
+        //Destroy everyting from the previous scene.
+        Debug.Log("Destroying catalogue.");
+        Destroy(catalogue.gameObject);
+
         SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+
         yield return null;
+
+        //Create a new catalogue from the new scene.
+        updateCatalogue();
+
+        //@TODO cleanup other created player character(s)
+        //@TODO Place player at the appropriate position.
     }
 
     void GoBlack()

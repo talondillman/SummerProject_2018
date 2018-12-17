@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
 
         lastPosition = transform.position;
         DontDestroyOnLoad(Instance);
-        CameraController.UsingExistingOrCreateNewMainCamera();//check camera
+        //CameraController.UsingExistingOrCreateNewMainCamera();//check camera
     }
 	
 	void Update ()
