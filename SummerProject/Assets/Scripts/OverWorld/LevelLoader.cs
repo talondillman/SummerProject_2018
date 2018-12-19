@@ -74,7 +74,7 @@ public class LevelLoader : MonoBehaviour {
         ignore[MainCamera.transform] = true;
         ignore[shared] = true;
 
-        updateCatalogue();
+        updateCatalogue(SceneManager.GetActiveScene().name);
         
     }
     /// <summary>
@@ -91,29 +91,7 @@ public class LevelLoader : MonoBehaviour {
         panel.GetComponent<Image>().color = new Color(0, 0, 0, 0);
     }
 
-    /// <summary>
-    /// Runs through every object in the scene and puts it in the catalogue
-    /// </summary>
-    private void updateCatalogue()
-    {
-        //Create catalogue of gameObjects
-        catalogue = new GameObject().transform;
-        catalogue.name = "_" + SceneManager.GetActiveScene().name;
-
-        foreach (Transform t in Object.FindObjectsOfType<Transform>()) {
-
-            if (ignore.ContainsKey(t)) {
-                Debug.Log("This object is ignored : " + t.ToString());
-                continue;
-            }
-
-            if (t.parent == null) {
-                Debug.Log("This object parent set to catlogue : " + t.ToString());
-                t.SetParent(catalogue);
-            }
-        }
-    }
-
+    
     /// <summary>
     /// Sets all the GUI variables
     /// </summary>
@@ -177,7 +155,6 @@ public class LevelLoader : MonoBehaviour {
     /// <param name="spawnID"> The spawn point to place the player </param>
     public void LoadScene(string scene, int spawnID)
     {
-        Debug.Log("in loadScene with scene " + scene + " and spawnID: " + spawnID);
         LastScene = SceneManager.GetActiveScene().name;
         this.spawnID = spawnID;
 
@@ -189,7 +166,6 @@ public class LevelLoader : MonoBehaviour {
         Vector3 spawnhere;
         SpawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform.GetChild(spawnID);
         spawnhere = SpawnPoint.position;
-        Debug.Log("Finding player and moving.");
         Player.transform.position = spawnhere;
     }
     /// <summary>
@@ -222,6 +198,29 @@ public class LevelLoader : MonoBehaviour {
         StartCoroutine(LoadSceneLoop(scene));
     }
     /// <summary>
+    /// Runs through every object in the scene and puts it in the catalogue
+    /// </summary>
+    private void updateCatalogue(string scene)
+    {
+        //Create catalogue of gameObjects
+        catalogue = new GameObject().transform;
+        catalogue.name = "_" + scene;
+
+        foreach (Transform t in Object.FindObjectsOfType<Transform>()) {
+
+            if (ignore.ContainsKey(t)) {
+                //Debug.Log("This object is ignored : " + t.ToString());
+                continue;
+            }
+
+            if (t.parent == null) {
+                //Debug.Log("This object parent set to catlogue : " + t.ToString());
+                t.SetParent(catalogue);
+            }
+        }
+    }
+
+    /// <summary>
     /// Destroys the catalougue from the previous scene and creates a new one in the new scene.
     /// </summary>
     /// <param name="scene">The scene to move to</param>
@@ -237,7 +236,7 @@ public class LevelLoader : MonoBehaviour {
         yield return null;
 
         //Create a new catalogue from the new scene.
-        updateCatalogue();
+        updateCatalogue(scene);
 
         //%TODO hadle the enemy respawn
     }
