@@ -97,7 +97,6 @@ public class LevelLoader : MonoBehaviour {
     /// </summary>
     public void setEverything()
     {
-        Debug.Log("Init values for UI");
         Player1HealthMax = 22;
         Player1Health = Player1HealthMax;
         Player2HealthMax = 27;
@@ -142,10 +141,6 @@ public class LevelLoader : MonoBehaviour {
         Invoke("GoBlack", 1.5f);
         Invoke("GoBack", 1.5f);
 
-        Vector3 spawnhere;
-        SpawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform.GetChild(0);
-        spawnhere = SpawnPoint.position;
-        Player.transform.position = spawnhere;
     }
 
     /// <summary>
@@ -163,10 +158,6 @@ public class LevelLoader : MonoBehaviour {
         Invoke("GoBlack", 0f);
         Invoke("GoBack", timeToWhite);
 
-        Vector3 spawnhere;
-        SpawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform.GetChild(spawnID);
-        spawnhere = SpawnPoint.position;
-        Player.transform.position = spawnhere;
     }
     /// <summary>
     /// Loads the Dance Battle Scene or transitions back from the Dance Battle.
@@ -179,8 +170,8 @@ public class LevelLoader : MonoBehaviour {
         Invoke("GoBlack", 0f);
         Invoke("GoBack", timeToWhite);
 
-        // @TODO I want to NOT disable the player and the camera. Instead we can use the same character w/ the additive scene loading.
-        // @TODO this would likely mean the camera's LOOKAT trait would be used rather than what @Angelique is using.
+        spawnID = -1;
+        
         if (DanceBattle) {
             LastScene = SceneManager.GetActiveScene().name;
             Debug.Log("Last Scene " + LastScene);
@@ -192,10 +183,18 @@ public class LevelLoader : MonoBehaviour {
             MainCamera.SetActive(true);
             Player.SetActive(true);
             gameObject.transform.Find("Canvas").Find("Lower_Right_UI").gameObject.SetActive(true);
-            Player.transform.position = EndBattleSpawnPoint.position;
         }
 
         StartCoroutine(LoadSceneLoop(scene));
+    }
+
+    private void SpawnHere(int spawnID)
+    {
+        if(spawnID < 0) { spawnID = GameObject.FindGameObjectWithTag("SpawnPoint").transform.childCount; }
+        Vector3 spawnhere;
+        SpawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform.GetChild(spawnID);
+        spawnhere = SpawnPoint.position;
+        Player.transform.position = spawnhere;
     }
     /// <summary>
     /// Runs through every object in the scene and puts it in the catalogue
@@ -228,15 +227,15 @@ public class LevelLoader : MonoBehaviour {
     IEnumerator LoadSceneLoop(string scene)
     {
         //Destroy everyting from the previous scene.
-        Debug.Log("Destroying catalogue.");
         Destroy(catalogue.gameObject);
 
         SceneManager.LoadScene(scene, LoadSceneMode.Additive);
 
         yield return null;
 
-        //Create a new catalogue from the new scene.
+        //Create a new catalogue from the new scene. Spawn player in the right place.
         updateCatalogue(scene);
+        SpawnHere(spawnID);
 
         //%TODO hadle the enemy respawn
     }
