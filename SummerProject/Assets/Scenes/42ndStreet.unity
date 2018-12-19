@@ -11394,7 +11394,7 @@ Transform:
   - {fileID: 262863752}
   - {fileID: 216151736}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &299586498
 GameObject:
@@ -54922,10 +54922,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d25cf0f7af3c78f47a050f02afaec8c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   distance: 2
   travelToSceneNamed: WhiteBoxStreet
-  spawnPoint: 1
+  spawnID: 0
 --- !u!1 &1400405541
 GameObject:
   m_ObjectHideFlags: 0
@@ -81393,7 +81392,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4021739122032272, guid: bc56eb5076c86d34bb66f53e54841803, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4021739122032272, guid: bc56eb5076c86d34bb66f53e54841803, type: 2}
       propertyPath: m_LocalPosition.z
@@ -81417,7 +81416,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4021739122032272, guid: bc56eb5076c86d34bb66f53e54841803, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938291324859002, guid: bc56eb5076c86d34bb66f53e54841803, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bc56eb5076c86d34bb66f53e54841803, type: 2}

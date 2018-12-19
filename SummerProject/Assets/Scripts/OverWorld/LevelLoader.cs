@@ -6,7 +6,8 @@ using UnityEngine.UI;
 using TMPro;
 
 
-// @TODO realistically all that should be in this script is the level loading stuff and the catalogues to keep track of shared objects I would like to move all the UI stuff to a different script for easier management and adaptibility.
+// @TODO realistically all that should be in this script is the level loading stuff and the catalogues to keep track of 
+// shared objects I would like to move all the UI stuff to a different script for easier management and adaptibility.
 
 public class LevelLoader : MonoBehaviour {
         //There can only be one
@@ -238,8 +239,7 @@ public class LevelLoader : MonoBehaviour {
         //Create a new catalogue from the new scene.
         updateCatalogue();
 
-        //@TODO cleanup other created player character(s)
-        //@TODO Place player at the appropriate position.
+        //%TODO hadle the enemy respawn
     }
 
     void GoBlack()
