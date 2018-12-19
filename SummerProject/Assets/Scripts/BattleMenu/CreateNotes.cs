@@ -146,7 +146,7 @@ public class CreateNotes : MonoBehaviour
 						{
 							int heal = -3;
 							heal = +missedNotes;
-							PlayerStats.stats.TakeDamage(heal);
+							PlayerStats.stats.TakeDamageFrontPlayer(heal);
 
 							MoveDone();
 
@@ -475,11 +475,11 @@ public class CreateNotes : MonoBehaviour
 				{
 					//attacks player in front
 					if (severity == 1)
-						PlayerStats.stats.TakeDamage(3);
+						PlayerStats.stats.TakeDamageFrontPlayer(3);
 					if (severity == 2)
-						PlayerStats.stats.TakeDamage(5);
+						PlayerStats.stats.TakeDamageFrontPlayer(5);
 					if (severity == 3)
-						PlayerStats.stats.TakeDamage(7);
+						PlayerStats.stats.TakeDamageFrontPlayer(7);
 
 					break;
 				}

@@ -10,7 +10,6 @@ public class PlayerStats : MonoBehaviour
 	public int maxHealth = 50;                            // The amount of health the player starts the game with.
 	public int currHealth, currHealth2;                                   // The current health the player has.
 	public int groove;
-	public Slider healthSlider, gpSlider, healthSlider2, gpSlider2;                                 // Reference to the UI's health bar.
 	public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
 	public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
 	public static PlayerStats stats;
@@ -24,40 +23,28 @@ public class PlayerStats : MonoBehaviour
 	void Awake()
 	{
 		stats = this;
-		currHealth = maxHealth;
-		currHealth2 = maxHealth;
-		groove = 15;
+		currHealth = lvlLoader.Player1HealthMax;
+		currHealth2 = lvlLoader.Player2HealthMax;
+		groove = lvlLoader.CurrentGP;
 	}
 
 	private void Start()
 	{
-		// Set the initial health of the player.
+        // Set the initial health of the player.
 
-		currHealth = maxHealth;
-		currHealth2 = maxHealth;
-		groove = 15;
+        currHealth = lvlLoader.Player1HealthMax;
+        currHealth2 = lvlLoader.Player2HealthMax;
+        groove = lvlLoader.CurrentGP;
 
-	}
+    }
 
 	void Update()
 	{
 
-		////if health <=0 show Game Over
-		//if(PlayerPrefs.GetInt("MaxHealth") != currHealth)
-		//{
-		//    PlayerPrefs.SetInt("MaxHealth", currHealth);
-		//    PlayerPrefs.Save();
-		//}
-		//if (PlayerPrefs.GetInt("GP") != groove)
-		//{
-		//    PlayerPrefs.SetInt("GP", groove);
-		//    PlayerPrefs.Save();
-		//}
-
 	}
 
 
-	public void TakeDamage(int amount)
+	public void TakeDamageFrontPlayer(int amount)
 	{
 		// Set the damaged flag so the screen will flash.
 		damaged = true;
@@ -70,7 +57,7 @@ public class PlayerStats : MonoBehaviour
 			LevelLoader.ThisIsTheOnlyOne.UpdateUI();
 
 			// Set the health bar's value to the current health.
-			healthSlider.value = currHealth;
+			//healthSlider.value = currHealth;
 
 		}
 
@@ -82,7 +69,7 @@ public class PlayerStats : MonoBehaviour
 			LevelLoader.ThisIsTheOnlyOne.UpdateUI();
 
 			// Set the health bar's value to the current health.
-			healthSlider2.value = currHealth2;
+			//healthSlider2.value = currHealth2;
 
 		}
 
@@ -100,23 +87,20 @@ public class PlayerStats : MonoBehaviour
 
 		currHealth -= amount;
 		currHealth2 -= amount;
-		LevelLoader.ThisIsTheOnlyOne.Player1Health -= amount;
-		LevelLoader.ThisIsTheOnlyOne.Player2Health -= amount;
-		healthSlider.value = currHealth;
+		LevelLoader.ThisIsTheOnlyOne.Player1Health =currHealth;
+		LevelLoader.ThisIsTheOnlyOne.Player2Health =currHealth2;
+		//healthSlider.value = currHealth;
 
 
 		// Set the health bar's value to the current health.
-		healthSlider2.value = currHealth2;
+		//healthSlider2.value = currHealth2;
 	}
 	public void useGP(int amount)
 	{
-		groove -= amount;
-		gpSlider.value = groove;
+        groove -=amount;
+        //gpSlider.value = groove;
 
-		
-
-		int currGP = LevelLoader.ThisIsTheOnlyOne.CurrentGP - amount;
-		LevelLoader.ThisIsTheOnlyOne.CurrentGP = currGP;
+		LevelLoader.ThisIsTheOnlyOne.CurrentGP = groove;
 		LevelLoader.ThisIsTheOnlyOne.UpdateUI();
 	}
 	
@@ -131,6 +115,5 @@ public class PlayerStats : MonoBehaviour
 	{
 		// Set the death flag so this function won't be called again.
 		isDead = true;
-
 	}
 }
