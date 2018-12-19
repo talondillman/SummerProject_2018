@@ -34,7 +34,14 @@ public class Activator : MonoBehaviour
 		old = sr.color;
 		instance = this;
 	}
-
+    private bool checkNoteInput(string note)
+    {
+        if (notes.Count == 0)//don't check note tag if there hasn't been a note added to a queue
+        {
+            return Input.GetButtonDown(note);
+        }
+        return Input.GetButtonDown(note) && notes.Peek().tag == note;
+    }
 	// Update is called once per frame
 	void Update()
 	{
@@ -42,14 +49,15 @@ public class Activator : MonoBehaviour
 		{
 			sr.color = new Color(255, 255, 255);
 		}
-		bool input1 = Input.GetButtonDown("Note 1");
-		bool input2 = Input.GetButtonDown("Note 2");
-		bool input3 = Input.GetButtonDown("Note 3");
-		bool input4 = Input.GetButtonDown("Note 4") && notes.Peek().tag == "Note 4";
-		bool input5 = Input.GetButtonDown("Note 5") && notes.Peek().tag == "Note 5";
-		bool input6 = Input.GetButtonDown("Note 6") && notes.Peek().tag == "Note 6";
-		bool input7 = Input.GetButtonDown("Note 7") && notes.Peek().tag == "Note 7";
-		bool input8 = Input.GetButtonDown("Note 8") && notes.Peek().tag == "Note 8";
+
+        bool input1 = checkNoteInput("Note 1");
+		bool input2 = checkNoteInput("Note 2");
+		bool input3 = checkNoteInput("Note 3");
+		bool input4 = checkNoteInput("Note 4");
+		bool input5 = checkNoteInput("Note 5");
+		bool input6 = checkNoteInput("Note 6");
+		bool input7 = checkNoteInput("Note 7");
+        bool input8 = checkNoteInput("Note 8");
 
 		//if one of the input keys is pressed but there's no note in range, flash the activator but do nothing
 		if (!pressableNote && (input1 || input2 || input3 || input4 || input5 || input6 || input7 || input8))
@@ -59,18 +67,9 @@ public class Activator : MonoBehaviour
 		}
 		if (notes.Count != 0)//queue is not empty
 		{
-			bool note1 = Input.GetButtonDown("Note 1") && notes.Peek().tag == "Note 1";
-			bool note2 = Input.GetButtonDown("Note 2") && notes.Peek().tag == "Note 2";
-			bool note3 = Input.GetButtonDown("Note 3") && notes.Peek().tag == "Note 3";
-			bool note4 = Input.GetButtonDown("Note 4") && notes.Peek().tag == "Note 4";
-			bool note5 = Input.GetButtonDown("Note 5") && notes.Peek().tag == "Note 5";
-			bool note6 = Input.GetButtonDown("Note 6") && notes.Peek().tag == "Note 6";
-			bool note7 = Input.GetButtonDown("Note 7") && notes.Peek().tag == "Note 7";
-			bool note8 = Input.GetButtonDown("Note 8") && notes.Peek().tag == "Note 8";
-
 			//button pressed should correspond with type of note
-			if (pressableNote && (note1 || note2 || note3 || note4 || note5 || note6 || note7 || note8))
-			{
+			if (pressableNote && (input1 || input2 || input3 || input4 || input5 || input6 || input7 || input8))
+            {
 				CreateNotes.instance.hitNotes.Add(notes.Peek().tag);
 				Destroy(notes.Dequeue());
 				StartCoroutine(Pressed());
@@ -89,12 +88,9 @@ public class Activator : MonoBehaviour
 		noteHit = false;
 		pressableNote = true;
 		string tag = col.gameObject.tag;
-		Debug.Log("Note Collision: " + tag);
+		//Debug.Log("Note Collision: " + tag);
 
-		//if (tag == "Note 1" || tag == "Note 2" || tag == "Note 3" || tag == "Note 4" || tag == "Note 5" || tag == "Note 6" || tag == "Note 7" || tag == "Note 8")
-		//{
 		notes.Enqueue(col.gameObject);
-		//}
 	}
 
 	private void OnTriggerExit2D(Collider2D col)
@@ -110,7 +106,6 @@ public class Activator : MonoBehaviour
 		//Need to fix
 
 		sr.color = new Color(0, 0, 0);
-
 		yield return new WaitForSeconds(0.001f);
 		sr.color = old;
 	}
